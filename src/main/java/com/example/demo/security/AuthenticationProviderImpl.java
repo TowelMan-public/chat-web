@@ -12,6 +12,12 @@ import org.springframework.stereotype.Component;
 import com.example.demo.client.exception.LoginFailureException;
 import com.example.demo.sevice.UserDetailsServiceImp;
 
+/**
+ * 実際にログイン処理を行うクラス
+ * AbstractUserDetailsAuthenticationProviderを継承している
+ * 
+ * @see org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider
+ */
 @Component
 public class AuthenticationProviderImpl extends AbstractUserDetailsAuthenticationProvider {
 	@Autowired
@@ -19,11 +25,16 @@ public class AuthenticationProviderImpl extends AbstractUserDetailsAuthenticatio
 
 	private static final String DUMMY_PASSWORD = "DUMMY_PASSWORD"; //認証では使用しないため、値は何でもよい(nullや空文字列はNG)
 	
+	/**
+	 * なにもしない
+	 */
 	@Override
-	//何もしない
 	protected void additionalAuthenticationChecks(UserDetails userDetails,
 			UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {}
 
+	/**
+	 * ログイン処理を書くところ
+	 */
 	@Override
 	protected UserDetails retrieveUser(String userIdName, UsernamePasswordAuthenticationToken authentication)	throws AuthenticationException {
 	    String password = (String) authentication.getCredentials();

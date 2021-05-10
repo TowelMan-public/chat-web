@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -14,14 +15,26 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.security.UserDetailsImp;
 
+/**
+ * RestTemplateを便利にするための
+ * 
+ * @see org.springframework.web.client.RestTemplate
+ */
 @Component
 public class RestTemplateAdapter {
 	
 	RestTemplateExceptionHandler restTemplateExceptionHandler;
 	
 	private final RestTemplate restTemplate;
-	
-	//RestTemplateの設定
+
+	/**
+	 * デフォルトコンストラクタ<br>
+	 * RestTemplateの設定を行う<br>
+	 * エラーハンドリングにRestTemplateExceptionHandlerをセットしている
+	 * 
+	 * @see org.springframework.web.client.RestTemplate
+	 * @see com.example.demo.client.rest.RestTemplateExceptionHandler
+	 */
 	public RestTemplateAdapter() {
 		restTemplateExceptionHandler = new RestTemplateExceptionHandler();
 		
@@ -30,12 +43,21 @@ public class RestTemplateAdapter {
 							.build();
 	}
 	
+	/**
+	 * 認証されているときに使うPOSTメソッド実行メソッド
+	 * @param <R> リクエストボディーのクラス型
+	 * @param <T> レスポンスボディーのクラス型
+	 * @param url apiのURL
+	 * @param requestBody リクエストボディー
+	 * @param responseBodyClass レスポンスボディーのクラス型
+	 * @param user ユーザー情報（認証用トークンを取得するため）
+	 * @return <T>に指定されたレスポンスボディー
+	 */
 	public <R,T> T postForObjectWhenLogined(String url, R requestBody, Class<T> responseBodyClass,UserDetailsImp user) {
 		//リクエスト作成
 		RequestEntity<R> requestEntity = 
 		        RequestEntity
 		          .post(url)
-		          //.contentType(MediaType.APPLICATION_JSON)
 		          .header("X-AUTH-TOKEN",user.getTokenForServer())
 		          .body(requestBody);
 		
@@ -44,31 +66,22 @@ public class RestTemplateAdapter {
 		return responseEntity.getBody();
 	}
 	
+	/**
+	 * 認証されているときに使うGETメソッド実行メソッド
+	 * @param <R> リクエストボディーのクラス型
+	 * @param <T> レスポンスボディーのクラス型
+	 * @param url apiのURL
+	 * @param requestBody リクエストボディー
+	 * @param responseBodyClass レスポンスボディーのクラス型
+	 * @param user ユーザー情報（認証用トークンを取得するため）
+	 * @return <T>に指定されたレスポンスボディー
+	 */
 	public <R,T> T getForObjectWhenLogined(String url, R requestBody, Class<T> responseBodyClass,UserDetailsImp user) {
-		//変換
-		Map<String, String> requestBodyMap;
-		try {
-			requestBodyMap = BeanUtils.describe(requestBody);
-		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			requestBodyMap = new HashMap<>();
-		}
-		
-		//URLの作成
-		StringBuilder bld = new StringBuilder("");
-		for(Map.Entry<String, ?> entry : requestBodyMap.entrySet()) {
-			if(entry.getValue() != null)
-				bld.append(entry.getKey() + "=" + entry.getValue().toString() + "&");
-		}
-		
-		if(requestBodyMap.size() != 0) {
-			bld.setLength(bld.length()-1);
-			url += "?" + bld.toString();
-		}
-		
 		//リクエスト作成
 		RequestEntity<Void> requestEntity = 
 		        RequestEntity
-		          .get(url)
+		          .get(
+		        	  createGetUrlWithQueryString(url,requestBody))
 		          .header("X-AUTH-TOKEN",user.getTokenForServer())
 		          .build();
 		
@@ -77,31 +90,23 @@ public class RestTemplateAdapter {
 		return responseEntity.getBody();
 	}
 	
-	public <R,T> List<T> getForObjectsWhenLogined(String url, R requestBody, Class<T> oneOfResponseBodyClass,UserDetailsImp user) {
-		//変換
-		Map<String, String> requestBodyMap;
-		try {
-			requestBodyMap = BeanUtils.describe(requestBody);
-		} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-			requestBodyMap = new HashMap<>();
-		}
-		
-		//URLの作成
-		StringBuilder bld = new StringBuilder("");
-		for(Map.Entry<String, ?> entry : requestBodyMap.entrySet()) {
-			if(entry.getValue() != null)
-				bld.append(entry.getKey() + "=" + entry.getValue().toString() + "&");
-		}
-		
-		if(requestBodyMap.size() != 0) {
-			bld.setLength(bld.length()-1);
-			url += "?" + bld.toString();
-		}
-		
+	/**
+	 * 認証されているときに使うGETメソッド実行メソッド<br>
+	 * レスポンスボディーがList<<?>の時用
+	 * @param <R> リクエストボディーのクラス型
+	 * @param <T> レスポンスボディーのクラス型
+	 * @param url apiのURL
+	 * @param requestBody リクエストボディー
+	 * @param responseBodyClass レスポンスボディーのクラス型
+	 * @param user ユーザー情報（認証用トークンを取得するため）
+	 * @return <T>に指定されたレスポンスボディーのList
+	 */
+	public <R,T> List<T> getForObjectsWhenLogined(String url, R requestBody, Class<T> oneOfResponseBodyClass,UserDetailsImp user) {		
 		//リクエスト作成
 		RequestEntity<Void> requestEntity = 
 		        RequestEntity
-		          .get(url)
+		          .get(
+		        	  createGetUrlWithQueryString(url,requestBody))
 		          .header("X-AUTH-TOKEN",user.getTokenForServer())
 		          .build();
 		
@@ -110,19 +115,48 @@ public class RestTemplateAdapter {
 		return responseEntity.getBody();
 	}
 	
+	/**
+	 * 認証されていないときに使うPOSTメソッド実行メソッド
+	 * @param <R> リクエストボディーのクラス型
+	 * @param <T> レスポンスボディーのクラス型
+	 * @param url apiのURL
+	 * @param requestBody リクエストボディー
+	 * @param responseBodyClass レスポンスボディーのクラス型
+	 * @return <T>に指定されたレスポンスボディーが入ってるResponseEntity
+	 */
 	public <R ,T> ResponseEntity<T> postForObject(String url,R requestBody, Class<T> responseBodyClass) {		
 		//リクエスト作成
 		RequestEntity<R> requestEntity = 
 		        RequestEntity
 		          .post(url)
-		          //.contentType(MediaType.MULTIPART_FORM_DATA)
 		          .body(requestBody);
 		
 		//実行
 		return restTemplate.exchange(requestEntity, responseBodyClass);
 	}
 	
-	public <R,T>  ResponseEntity<T> gettForObject(String url, R requestBody, Class<T> responseBodyClass) {
+	/**
+	 * 認証されていないときに使うGETメソッド実行メソッド
+	 * @param <R> リクエストボディーのクラス型
+	 * @param <T> レスポンスボディーのクラス型
+	 * @param url apiのURL
+	 * @param requestBody リクエストボディー
+	 * @param responseBodyClass レスポンスボディーのクラス型
+	 * @return <T>に指定されたレスポンスボディーが入ってるResponseEntity
+	 */
+	public <R,T>  ResponseEntity<T> getForObject(String url, R requestBody, Class<T> responseBodyClass) {
+		//リクエスト作成
+		RequestEntity<Void> requestEntity = 
+		        RequestEntity
+		          .get(
+		        	  createGetUrlWithQueryString(url,requestBody))
+		          .build();
+		
+		//実行
+		return restTemplate.exchange(requestEntity, responseBodyClass);
+	}
+	
+	private <R> String createGetUrlWithQueryString(String url, R requestBody) {
 		//変換
 		Map<String, String> requestBodyMap;
 		try {
@@ -140,16 +174,9 @@ public class RestTemplateAdapter {
 		
 		if(requestBodyMap.size() != 0) {
 			bld.setLength(bld.length()-1);
-			url += "?" + bld.toString();
+			return url + "?" + bld.toString();
+		}else {
+			return url;
 		}
-		
-		//リクエスト作成
-		RequestEntity<Void> requestEntity = 
-		        RequestEntity
-		          .get(url)
-		          .build();
-		
-		//実行
-		return restTemplate.exchange(requestEntity, responseBodyClass);
 	}
 }

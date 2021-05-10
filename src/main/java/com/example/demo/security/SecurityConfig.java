@@ -10,7 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import com.example.demo.configurer.UrlConfig;
 
-
+/**
+ * SpringSecurityの全体的な設定<br>
+ * WebSecurityConfigurerAdapterを実装している
+ * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	AuthenticationProviderImpl authenticationProviderImpl;
 	
+	/**
+     * 認証・URLのアクセス設定・ログイン・ログアウトの設定など多くの設定を行っている
+     */
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -48,12 +55,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl(LOGIN_PAGE);
     }
 	
+	/**
+	 * 認証を無視するURLの設定
+	 */
 	@Override
     public void configure(WebSecurity web) throws Exception {
         // 静的リソースに対するアクセスはセキュリティ設定を無視する
-        web.ignoring().antMatchers("/style.css");
+        web
+        	.ignoring()
+        		.antMatchers("/style.css");
     }
 	
+	/**
+	 * ログイン処理の設定<br>
+	 * AuthenticationProviderImplをログイン処理として設定している
+	 * @see com.example.demo.security.SecurityConfig.authenticationProviderImpl
+	 */
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProviderImpl);

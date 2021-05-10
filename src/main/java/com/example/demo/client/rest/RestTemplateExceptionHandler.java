@@ -1,12 +1,23 @@
 package com.example.demo.client.rest;
 
 import java.io.IOException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
 
+/**
+ * RestTemplateAdapterのエラーハンドリング<br>
+ * ResponseErrorHandlerを実装
+ * 
+ * @see com.example.demo.client.rest.RestTemplateAdapter
+ * @see org.springframework.web.client.ResponseErrorHandler
+ */
 public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 	
+	/**
+	 * エラーハンドリングするところ
+	 */
 	@Override
 	public void handleError(ClientHttpResponse error) throws IOException {
 		//ErrorResponse errorResponse = getErrorResponse(error);
@@ -40,6 +51,9 @@ public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 		}*/
 	}
 	
+	/**
+	 * エラーがあるかを判断する所
+	 */
 	@Override
 	public boolean hasError(ClientHttpResponse response) throws IOException {
 		return response.getStatusCode().series() == HttpStatus.Series.CLIENT_ERROR ||

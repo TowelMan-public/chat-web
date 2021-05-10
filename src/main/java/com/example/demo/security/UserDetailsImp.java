@@ -8,6 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
+/**
+ * ユーザー情報を認証回りで使うためのオブジェクト
+ * UserDetailsを実装している
+ * 
+ * @see org.springframework.security.core.userdetails.UserDetails
+ */
 @Data
 public class UserDetailsImp implements UserDetails {
 	private static final long serialVersionUID = 6088431978182349464L;
