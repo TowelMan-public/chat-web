@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.client.exception.LoginFailureException;
+import com.example.demo.client.exception.LoginException;
 import com.example.demo.sevice.UserDetailsServiceImp;
 
 /**
@@ -52,7 +52,7 @@ public class AuthenticationProviderImpl extends AbstractUserDetailsAuthenticatio
 	        		userDetailsServiceImp.loginAndReturnToken(userIdName, password));
 	        user.setUsername(userIdName);
 	        user.setPassword(DUMMY_PASSWORD);
-        }catch(LoginFailureException e){
+        }catch(LoginException e){
         	throw new BadCredentialsException(e.getMessage());
         }
         //認証情報を返す

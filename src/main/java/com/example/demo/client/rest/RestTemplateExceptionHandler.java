@@ -1,10 +1,16 @@
 package com.example.demo.client.rest;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestClientResponseException;
+
+import com.example.demo.client.exception.*;
+
+import lombok.Data;
 
 /**
  * RestTemplateAdapterのエラーハンドリング<br>
@@ -20,35 +26,39 @@ public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 	 */
 	@Override
 	public void handleError(ClientHttpResponse error) throws IOException {
-		//ErrorResponse errorResponse = getErrorResponse(error);
+		ErrorResponse errorResponse = getErrorResponse(error);
 		
 		//各種具体的にわかる例外を投げる・分別ができないときは他のやつ投げる
-		//TODO
-		/*
 		switch(errorResponse.getErrorCode()) {
-		case "AlreadyUsedException":
-			throw new AlreadyUsedException(errorResponse.getMessage());
-		case "HaveNotAuthorityInSpaceException":
-			throw new HaveNotAuthorityInSpaceException(errorResponse.getMessage());
 		case "NotFoundException":
 			throw new NotFoundException(errorResponse.getMessage());
-		case "SpaceIsnotPublicException":
-			throw new SpaceIsnotPublicException(errorResponse.getMessage());
-		case "UserAleadyJoinSpaceException":
-			throw new UserAleadyJoinSpaceException(errorResponse.getMessage());
-		case "IsSimpleSpaceException":
-			throw new IsSimpleSpaceException(errorResponse.getMessage());
+		case "LoginException":
+			throw new LoginException(errorResponse.getMessage());
+		case "AlreadyHaveUserException":
+			throw new AlreadyHaveUserException();
+		case "AlreadyInsertedGroupDesireException":
+			throw new AlreadyInsertedGroupDesireException();
+		case "AlreadyInsertedGroupException":
+			throw new AlreadyInsertedGroupException();
+		case "AlreadyUsedUserIdNameException":
+			throw new AlreadyUsedUserIdNameException();
+		case "NotHaveUserException":
+			throw new NotHaveUserException();
+		case "NotInsertedGroupDesireException":
+			throw new NotInsertedGroupDesireException();
+		case "NotJoinGroupException":
+			throw new NotJoinGroupException();
+		case "BadRequestFormException":
+			throw new BadRequestFormException(errorResponse.getMessage());
 		default:
 			switch(HttpStatus.valueOf(error.getRawStatusCode())) {
 			case UNAUTHORIZED:
 				throw new InvalidLoginException(errorResponse.getMessage());
-			case FORBIDDEN:
-				throw new LoginFailureException(errorResponse.getMessage());
 			default:
 				throw new RestClientResponseException(errorResponse.getMessage(), error.getStatusCode().value(),
 														errorResponse.getErrorCode(), error.getHeaders(), error.getBody().readAllBytes(), null);
 			}
-		}*/
+		}
 	}
 	
 	/**
@@ -60,8 +70,9 @@ public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 				response.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR;
 	}
 	
-	//エラーボディーをこれらで解析する予定
-	/*
+	/**
+	 * エラーボディーを解析する
+	 */
 	private ErrorResponse getErrorResponse(ClientHttpResponse e) throws IOException {
 		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^.*\"errorCode\":\"(.*)\".*\"message\":\"(.*)\"$");
 		String bodyString = new String( e.getBody().readAllBytes());
@@ -85,5 +96,4 @@ public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 	    	errorCode = "NULL";
 	    }
 	}
-	*/
 }
