@@ -8,7 +8,16 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.client.exception.*;
+import com.example.demo.client.exception.AlreadyHaveUserException;
+import com.example.demo.client.exception.AlreadyInsertedGroupDesireException;
+import com.example.demo.client.exception.AlreadyInsertedGroupException;
+import com.example.demo.client.exception.AlreadyUsedUserIdNameException;
+import com.example.demo.client.exception.BadRequestFormException;
+import com.example.demo.client.exception.InvalidLoginException;
+import com.example.demo.client.exception.NotFoundException;
+import com.example.demo.client.exception.NotHaveUserException;
+import com.example.demo.client.exception.NotInsertedGroupDesireException;
+import com.example.demo.client.exception.NotJoinGroupException;
 import com.example.demo.configurer.UrlConfig;
 
 /**
