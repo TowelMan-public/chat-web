@@ -2,18 +2,17 @@
 
 <html lang="jp" xmlns:th="http://www.thymeleaf.org">
 	<head>
-		<title>簡易的な会計システム♪</title>
+		<title>チャット♪</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	
 	<body>
-		<h1>ToDoリスト♪</h1>
+		<h1>チャット♪</h1>
 		<h2>ログイン</h2>
-		<div th:if="${loginError}" th:text="${error}" ></div>
-		<form th:action="@{/web/login}" method="post" action="#"> 
-			<div class="input_label">ユーザー名：<input type="text" name="userIdName" /></div><br>
+		<form th:action="@{/web/login}" method="post"> 
+			<div class="input_label">ユーザーID名：<input type="text" name="userIdName" /></div><br>
 			<div class="input_label">パスワード：<input type="password" name="password"/></div><br>
 			<p><input type="submit" value="ログイン" class="button"/></p>
 		</form>

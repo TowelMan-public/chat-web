@@ -1,0 +1,40 @@
+<th:block th:fragment="group_details(ContentModel, UpdateName, InsertUser)">
+	<th:block th:object="${ContentModel}">
+		<h2>グループの詳細</h2>
+		
+		<form th:action="@{/web/group/update/name/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" th:object="${UpdateName}"> 
+			<div>グループ名：<input type="text" name="name" th:field="*{name}"/></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+			<input type="submit" class="button" value="変更" />
+		</form>
+		<br><br>
+		<form th:action="@{/web/group/delete/name/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" class="button_form"> 
+			<input type="submit" class="delete_button" value="このグループの削除"/>
+		</form>
+		<br><br><br><br>
+		
+		<h2>グループにお誘い</h2>
+		<form th:action="@{/web/group/user/user/insert/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" th:object="${InsertUser}"> 
+			<div>加入させたいユーザーのID名：<input type="text" name="userIdName" th:field="*{userIdName}"/></div> <div th:if="${#fields.hasErrors('userIdName')}" th:errors="*{userIdName}" /><br>
+			<input type="submit" class="button" value="勧誘" />
+		</form>
+		<br><br>
+		
+		<table border="1" align="center" class="see_table">
+			<tr>
+				<th>ユーザー名</th>
+				<th>ユーザーID名</th>
+				<th>削除</th>
+			</tr>
+			<tr th:each="list : *{userInGroupList}" th:object="${list}">
+				<td style="min-width: 8em;" th:text="*{userName}"></td>
+				<td th:text="*{userIdName}"></td>
+				<td>
+					<form th:action="@{/web/group/user/user/delete/{groupTalkRoomId}/{userIdName}(groupTalkRoomId=*{groupTalkRoomId}, userIdName=*{userIdName})}" method="post" class="button_form"> 
+						<input type="submit" class="delete_button" value="削除" />
+					</form>
+				</td>
+			</tr>
+		</table>
+		
+	</th:block>
+</th:block>

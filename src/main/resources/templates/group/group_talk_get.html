@@ -1,0 +1,14 @@
+<th:block th:fragment="group_talk_get(ContentModel, UpdateTalkForm)">
+	<th:block th:object="${ContentModel}">
+		<h2>友達トークの詳細</h2>
+		
+		<div class="chat_send_message_box">
+			<form th:action="@{/web/group/talk/update/{groupTalkRoomId}/{talkIndex}(groupTalkRoomId=*{groupTalkRoomId}, talkIndex=*{talkIndex})}" method="post" th:object="${UpdateTalkForm}"> 
+				<div><textarea cols="50" rows="5" name="talkContent" th:field="*{talkContent}"></textarea></div> <div th:if="${#fields.hasErrors('talkContent')}" th:errors="*{talkContent}" />
+				<input type="submit" class="button" value="変更" />
+				<input type="submit" class="delete_button" value="削除" form="delete_form"/>
+			</form>
+		</div>
+		<form th:action="@{/web/group/talk/delete/{groupTalkRoomId}/{talkIndex}(groupTalkRoomId=*{groupTalkRoomId}, talkIndex=*{talkIndex})}" method="post" class="button_form" id="delete_form"></form>
+	</th:block>
+</th:block>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>チャット♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script>
+			jQuery( function($) {
+			    $('tbody td[data-href]').addClass('clickable').click( function() {
+			        window.location = $(this).attr('data-href');
+			    }).find('a').hover( function() {
+			        $(this).parents('td').unbind('click');
+			    }, function() {
+			        $(this).parents('td').click( function() {
+			            window.location = $(this).attr('data-href');
+			        });
+			    });
+			});
+			
+			jQuery( function($) {
+			    $('tbody th[data-href]').addClass('clickable').click( function() {
+			        window.location = $(this).attr('data-href');
+			    }).find('a').hover( function() {
+			        $(this).parents('th').unbind('click');
+			    }, function() {
+			        $(this).parents('th').click( function() {
+			            window.location = $(this).attr('data-href');
+			        });
+			    });
+			});
+			
+			jQuery( function($) {
+			    $('body div[data-href]').addClass('clickable').click( function() {
+			        window.location = $(this).attr('data-href');
+			    }).find('a').hover( function() {
+			        $(this).parents('div').unbind('click');
+			    }, function() {
+			        $(this).parents('div').click( function() {
+			            window.location = $(this).attr('data-href');
+			        });
+			    });
+			});
+		</script>
+	</head>
+	
+	<body>
+		<h1>チャット♪</h1>
+		<div class="see">
+			<div class="see_side">
+				<div class="see_side_menu">
+					<div class="hamburger-menu">
+						<input id="ac-check1" class="ac-check" type="checkbox">
+						<label class="ac-label" for="ac-check1">
+							トークルーム一覧
+						</label>
+						<div class="ac-content">
+							<li><a th:href="@{/web/insert/dialogue}">友達追加</a></li>
+							<li><a th:href="@{/web/create/group}">グループ作成</a></li>
+							<li><a th:href="@{/web/user}">設定</a></li>
+							<li><a th:href="@{/web/logout}">ログアウト</a></li>
+						</div>
+					</div>
+				</div>
+				<div class="see_side_lists_outer" th:object="${SeeSideListModel}">
+					<div class="see_side_lists_inner">
+						<div class="see_side_title">
+							<div class="hamburger-menu">
+								<input id="ac-check_have_user" class="ac-check" type="checkbox">
+								<label class="ac-label" for="ac-check_have_user">
+									友達一覧<div class="notice" th:if="*{allNoticeCountInHaveUserList} != 0" 
+											th:text="*{allNoticeCountInHaveUserList}"></div>
+								</label>
+								<th:block th:each="list : *{haveUserList}" th:object="${list}">
+									<div class="ac-content"
+										th:attr="data-href=@{/web/dialogue/{haveUserIdName}(haveUserIdName = *{userIdName})}">
+										<li><div class="see_side_content">
+											<div th:text="*{userName}"></div>
+											<div class="notice" 
+												th:if="*{noticeCount} != 0"
+												th:text="*{noticeCount}"></div>
+										</div></li>
+									</div>
+								</th:block>
+							</div>
+						</div>
+						<div class="see_side_title">
+							<div class="hamburger-menu">
+								<input id="ac-check_have_user" class="ac-check" type="checkbox">
+								<label class="ac-label" for="ac-check_have_user">
+									グループ一覧<div class="notice" th:if="*{allNoticeCountInGroupList} != 0" 
+												th:text="*{allNoticeCountInGroupList}"></div>
+								</label>
+								<th:block th:each="list : *{groupList}" th:object="${list}">
+									<div class="ac-content"
+										th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}">
+										<li><div class="see_side_content">
+											<div th:text="*{groupName}"></div>
+											<div class="notice" 
+												th:if="*{noticeCount} != 0"
+												th:text="*{noticeCount}"></div>
+										</div></li>
+									</div>
+								</th:block>
+							</div>
+						</div>
+						<div class="see_side_title">
+							<div class="hamburger-menu">
+								<input id="ac-check_have_user" class="ac-check" type="checkbox">
+								<label class="ac-label" for="ac-check_have_user">
+									友達になれそうな一覧<div class="notice" th:if="*{allNoticeCountInDesireHaveUserList} != 0"
+														th:text="*{allNoticeCountInDesireHaveUserList}"></div>
+								</label>
+								<th:block th:each="list : *{desireHaveUserList}" th:object="${list}">
+									<div class="ac-content"
+										th:attr="data-href=@{/web/desire/dialogue/{haveUserIdName}(haveUserIdName = *{userIdName})}">
+										<li><div class="see_side_content">
+											<div th:text="*{userName}"></div>
+											<div class="notice" 
+												th:if="*{noticeCount} != 0"
+												th:text="*{noticeCount}"></div>
+										</div></li>
+									</div>
+								</th:block>
+							</div>
+						</div>
+						<div class="see_side_title">
+							<div class="hamburger-menu">
+								<input id="ac-check_have_user" class="ac-check" type="checkbox">
+								<label class="ac-label" for="ac-check_have_user">
+									誘われているグループ一覧<div class="notice" th:if="*{allNoticeCountInDesireGroupList} != 0"
+															th:text="*{allNoticeCountInDesireGroupList}"></div>
+								</label>
+								<th:block th:each="list : *{desireGroupList}" th:object="${list}">
+									<div class="ac-content"
+										th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}">
+										<li><div class="see_side_content">
+											<div th:text="*{groupName}"></div>
+											<div class="notice" 
+												th:if="*{noticeCount} != 0"
+												th:text="*{noticeCount}"></div>
+										</div></li>
+									</div>
+								</th:block>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="see_contents">
+				<th:brock
+					th:if="${WebSeeContentType}=='dialigue'"
+				 	th:insert="talkRoom/dialogue::dialogue(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='group'"
+				 	th:insert="talkRoom/group::group(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='desire_dialogue'"
+				 	th:insert="talkRoom/desire_dialogue::desire_dialogue(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='desire_group'"
+				 	th:insert="talkRoom/desire_group::desire_group(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='dialogue_user'"
+				 	th:insert="dialogue/dialogue_user::dialogue_user(ContentModel=${ContentModel})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='dialogue_talk_get'"
+				 	th:insert="dialogue/dialogue_talk_get::dialogue_talk_get(ContentModel=${ContentModel}, UpdateTalkForm=${UpdateTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='group_details'"
+				 	th:insert="group/group_details::group_details(ContentModel=${ContentModel}, UpdateName=${UpdateName}, InsertUser=${InsertUser})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='group_talk_get'"
+				 	th:insert="group/group_talk_get::group_talk_get(ContentModel=${ContentModel}, UpdateTalkForm=${UpdateTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='insert_dialogue'"
+				 	th:insert="insert/insert_dialogue::insert_dialogue(InsertUser=${InsertUser})"></th:brock>
+				 
+				 <th:brock
+					th:if="${WebSeeContentType}=='create_group'"
+				 	th:insert="insert/create_group::create_group(CreateGroup=${CreateGroup})"></th:brock>
+				 
+				 <th:brock
+					th:if="${WebSeeContentType}=='user'"
+				 	th:insert="user::user(UpdateName=${UpdateName}, UpdateIdName=${UpdateIdName}, UpdatePassword=${UpdatePassword})"></th:brock>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,101 @@
+<th:block th:fragment="dialogue(ContentModel, InsertTalkForm)">
+	<th:block th:object="${ContentModel}">
+		<script>
+			$("div#talk_list_next").click(function(event) {
+				event.preventDefault();
+				var paramUrl = $(this).attr("ajax-href") + '?' + "startIndex=" + $(this).attr("ajax-index");
+
+				// トークリストに関するfragment(html)取得
+				$.ajax({
+					type : "GET",
+					url : paramUrl,
+					dataType : "html",
+					success : function(data, status, xhr) {
+						$('talk_list_next').remove();
+						
+						var  element = document.querySelector('talk_list');
+						element.innerHTML = element.innerHTML + data;
+					},
+					error : function(XMLHttpRequest, status, errorThrown) {
+						// エラー処理 何もしない
+					}
+				});
+			});
+		</script>
+		
+		<script>
+
+			$("div#talk_list_back").click(function(event) {
+				event.preventDefault();
+				var paramUrl = $(this).attr("ajax-href") + '?' + "startIndex=" + $(this).attr("ajax-index");
+
+				// トークリストに関するfragment(html)取得
+				$.ajax({
+					type : "GET",
+					url : paramUrl,
+					dataType : "html",
+					success : function(data, status, xhr) {
+						$('talk_list_back').remove();
+						
+						var  element = document.querySelector('talk_list');
+						element.innerHTML = data + element.innerHTML;
+					},
+					error : function(XMLHttpRequest, status, errorThrown) {
+						// エラー処理 何もしない
+					}
+				});
+			});
+		</script>
+		<div class="chat_header">
+			<div class="hamburger-menu chat_header_title">
+				<input id="ac-check2" class="ac-check" type="checkbox">
+				<label class="ac-label" for="ac-check2" th:text="*{groupName}"></label>
+				<div class="ac-content">
+					<li><a th:href="@{/web/group/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}">グループの詳細</a></li>
+				</div>
+			</div>
+		</div>
+		<div class="chat_list_outer">
+			<div class="chat_list_inner" id="talk_list">
+				
+				<div id="talk_list_back"
+					th:attr="
+						ajax-href=@{/load/group/{groupTalkRoomId}/back(groupTalkRoomId=*{groupTalkRoomId})}
+						ajax-index=*{firstIndex} - 1">
+						
+					<div class="talk_list_back_load talk_list_load">&#8679;</div>
+				</div>
+				<th:block th:each="list : *{talkList}" th:object="${list}">
+					<div class="chat_message_other"
+						th:if="! *{isMyTalk}">
+						
+						<div class="chat_message_other_sender" th:text="*{senderUserName}">	</div>
+						<div class="chat_message_text_me" th:text="*{talkContent}">	</div>
+						<div class="chat_message_date" th:text="*{dateString}">	</div>
+					</div>
+					
+					<div class="chat_message_me"
+						th:if="*{isMyTalk}"
+						th:attr="data-href=@{/web/group/talk/{groupTalkRoomId}/{talkIndex}(groupTalkRoomId = ${ContentModel.getGroupTalkRoomId()}, talkIndex = *{talkIndex})}">
+						
+						<div class="chat_message_text_me" th:text="*{talkContent}">	</div>
+						<div class="chat_message_date" th:text="*{dateString}">	</div>
+					</div>
+				</th:block>
+				<div id="talk_list_next"
+					th:attr="
+						ajax-href=@{/load/group/{groupTalkRoomId}/next(groupTalkRoomId=*{groupTalkRoomId})}
+						ajax-index=*{finalIndex} + 1">
+						
+					<div class="talk_list_next_load talk_list_load">&#8681;</div>
+				</div>
+			</div>
+		</div>
+		<div class="chat_send_message_box">
+			<form th:action="@{/web/group/talk/insert/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}" method="post" action="#" th:object="${InsertTalkForm}">
+				<div><textarea cols="50" rows="5" name="talkContent" th:field="*{talkContent}"></textarea></div> <div th:if="${#fields.hasErrors('talkContent')}" th:errors="*{talkContent}" />
+				<input type="submit" value="送信" class="button" />
+			</form>
+		</div>
+	</th:block>
+</th:block>

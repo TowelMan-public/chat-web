@@ -1,0 +1,37 @@
+<th:block th:fragment="group_talk_list_fragment(ContentModel)">
+	<th:block th:object="${ContentModel}">
+		<div id="talk_list_back"
+			th:if="*{firstIndex} != null"
+			th:attr="
+				ajax-href=@{/load/group/{groupTalkRoomId}/back(groupTalkRoomId=*{groupTalkRoomId})}
+				ajax-index=*{firstIndex} - 1">
+				
+			<div class="talk_list_back_load talk_list_load">&#8679;</div>
+		</div>
+		<th:block th:each="list : *{TalkList}" th:object="${list}">
+			<div class="chat_message_other"
+				th:if="! *{isMyTalk}">
+				
+				<div class="chat_message_other_sender" th:text="*{senderUserName}">	</div>
+				<div class="chat_message_text_me" th:text="*{talkContent}">	</div>
+				<div class="chat_message_date" th:text="*{dateString}">	</div>
+			</div>
+			
+			<div class="chat_message_me"
+				th:if="*{isMyTalk}"
+				th:attr="data-href=@{/web/group/talk/{groupTalkRoomId}/{talkIndex}(groupTalkRoomId = ${ContentModel.getGroupTalkRoomId()}, talkIndex = *{talkIndex})}">
+				
+				<div class="chat_message_text_me" th:text="*{talkContent}">	</div>
+				<div class="chat_message_date" th:text="*{dateString}">	</div>
+			</div>
+		</th:block>
+		<div id="talk_list_next"
+			th:if="*{finalIndex} != null"
+			th:attr="
+				ajax-href=@{/load/group/{groupTalkRoomId}/next(groupTalkRoomId=*{groupTalkRoomId})}
+				ajax-index=*{finalIndex} + 1">
+				
+			<div class="talk_list_next_load talk_list_load">&#8681;</div>
+		</div>
+	</th:block>
+</th:block>

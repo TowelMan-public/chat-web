@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>チャット♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	
+	<body>
+		<h1>チャット♪</h1>
+		<h2>エラー発生!!</h2>
+		<p th:text="${errorMessage}"></p>
+		<a 
+			th:if="${linkUrl}!=null" 
+			th:href="${linkUrl}"
+			th:text="${linkMessage}"></a>
+		
+		<div th:if="${linkUrl}==null">戻るボタンを押してください。</div>
+	</body>
+</html>
