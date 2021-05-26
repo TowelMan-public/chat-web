@@ -41,10 +41,9 @@ public class UserInDialogueApi {
 	 * @param userIdName ユーザーID名
 	 * @throws NotFoundException
 	 * @throws AlreadyHaveUserException
-	 * @throws NotHaveUserException
 	 */
 	public void insertUserInDiarogue(UserDetailsImp user, String userIdName) 
-			throws NotFoundException, AlreadyHaveUserException, NotHaveUserException {
+			throws NotFoundException, AlreadyHaveUserException {
 		final String URL = ROOT_URL + "/insert";
 		
 		var dto = new Dto();

@@ -19,4 +19,8 @@ public class NotFoundException extends RuntimeException {
 		matcher.matches();
 		return matcher.group(1);
 	}
+
+	public boolean isErrorFieldUserIdName() {
+		return getErrorFieldName().equals("userIdName");
+	}
 }

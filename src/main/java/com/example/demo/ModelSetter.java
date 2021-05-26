@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.ui.Model;
 
 import com.example.demo.form.insert.CreateGroupForm;
+import com.example.demo.form.insert.InsertUserForm;
 import com.example.demo.form.insert.SignupForm;
 import com.example.demo.form.update.UpdateIdNameForm;
 import com.example.demo.form.update.UpdateNameForm;
@@ -210,7 +211,7 @@ public class ModelSetter {
 	 * @param object セットしたいオブジェクト
 	 * @return 自分
 	 */
-	public ModelSetter setInsertUser(SignupForm object){
+	public ModelSetter setInsertUser(InsertUserForm object){
 		setOther("InsertUser", object);
 		return this;
 	}
