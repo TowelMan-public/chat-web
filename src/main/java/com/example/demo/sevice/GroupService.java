@@ -11,6 +11,9 @@ import com.example.demo.client.api.entity.GroupTalkRoomResponse;
 import com.example.demo.form.inner.GroupListModel;
 import com.example.demo.security.UserDetailsImp;
 
+/**
+ * グループに関するビジネスロジック
+ */
 @Service
 public class GroupService {
 

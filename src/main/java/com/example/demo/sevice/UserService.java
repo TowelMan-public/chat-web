@@ -9,6 +9,9 @@ import com.example.demo.client.exception.AlreadyUsedUserIdNameException;
 import com.example.demo.form.insert.SignupForm;
 import com.example.demo.security.UserDetailsImp;
 
+/**
+ * ログイン処理を省くユーザーに関するビジネスロジック
+ */
 @Service
 public class UserService {
 	

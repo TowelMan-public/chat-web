@@ -9,6 +9,9 @@ import com.example.demo.client.api.DesireUserApi;
 import com.example.demo.client.api.entity.DesireHaveUserResponse;
 import com.example.demo.security.UserDetailsImp;
 
+/**
+ * 友達追加申請に関するビジネスロジック
+ */
 @Service
 public class DesireDialogueService {
 	@Autowired

@@ -9,6 +9,9 @@ import com.example.demo.client.api.DesireGroupApi;
 import com.example.demo.client.api.entity.DesireUserInGroupResponce;
 import com.example.demo.security.UserDetailsImp;
 
+/**
+ * グループに加入してほしい申請に関するビジネスロジック
+ */
 @Service
 public class DesireGroupService {
 	@Autowired

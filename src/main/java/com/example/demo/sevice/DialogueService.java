@@ -13,6 +13,9 @@ import com.example.demo.client.exception.NotFoundException;
 import com.example.demo.form.inner.HaveUserModel;
 import com.example.demo.security.UserDetailsImp;
 
+/**
+ * 友達に関するビジネスロジック
+ */
 @Service
 public class DialogueService {
 
