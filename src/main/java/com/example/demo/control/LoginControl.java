@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.ModelSetter;
 import com.example.demo.configurer.UrlConfig;
 
 /**
@@ -12,7 +13,7 @@ import com.example.demo.configurer.UrlConfig;
  */
 @Controller
 @RequestMapping(UrlConfig.ROOT_URL)
-public class UserControl {
+public class LoginControl {
 	
 	/**
 	 * /loginページを表示する
@@ -21,6 +22,8 @@ public class UserControl {
 	 */
 	@GetMapping("login")
 	public String showLoginPage(Model model) {
-		return "/login";
+		return new ModelSetter(model, ModelSetter.PAGE_LOGIN)
+			
+					.buildAndReturnUrl();
 	}
 }

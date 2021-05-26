@@ -26,10 +26,10 @@ public class UserApi {
 	 * @param userIdName ユーザーID名
 	 * @param password パスワード
 	 * @return 認証用トークン
-	 * @throws AlreadyUsedUserIdNameException
+	 * @throws NotFoundException
 	 */
 	public String login(String userIdName, String password)
-			throws AlreadyUsedUserIdNameException {
+			throws NotFoundException {
 		final String URL = ROOT_URL + "/login";
 		
 		var dto = new Dto();
@@ -45,10 +45,10 @@ public class UserApi {
 	 * @param userName ユーザー名（ニックネーム）
 	 * @param userIdName ユーザーID名
 	 * @param password パスワード
-	 * @throws NotFoundException
+	 * @throws AlreadyUsedUserIdNameException
 	 */
 	public void insertUser(String userName, String userIdName, String password) 
-			throws NotFoundException{
+			throws AlreadyUsedUserIdNameException{
 		final String URL = ROOT_URL + "/insert";
 		
 		var dto = new Dto();
@@ -64,8 +64,10 @@ public class UserApi {
 	 * @param user ログイン情報
 	 * @param userIdName ユーザーID名
 	 * @return ユーザー情報
+	 * @throws NotFoundException
 	 */
-	public UserEntity getUser(UserDetailsImp user, String userIdName){
+	public UserEntity getUser(UserDetailsImp user, String userIdName)
+			throws NotFoundException{
 		final String URL = ROOT_URL + "/get";
 		
 		var dto = new Dto();
