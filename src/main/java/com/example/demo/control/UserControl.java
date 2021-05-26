@@ -63,7 +63,7 @@ public class UserControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return 表示するべきページのURLか、リダイレクト等のURL
 	 */
-	@PostMapping
+	@PostMapping("update/id")
 	public String updateUserIdName(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdateIdNameForm form, BindingResult result, RedirectAttributes redirect) {
 		//入力ﾁｪｯｸ
@@ -97,7 +97,7 @@ public class UserControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return 表示するべきページのURLか、リダイレクト等のURL
 	 */
-	@PostMapping
+	@PostMapping("update/name")
 	public String updateUserName(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdateNameForm form, BindingResult result, RedirectAttributes redirect) {
 		//入力ﾁｪｯｸ
@@ -122,7 +122,7 @@ public class UserControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return 表示するべきページのURLか、リダイレクト等のURL
 	 */
-	@PostMapping
+	@PostMapping("update/password")
 	public String updatePassword(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdatePasswordForm form, BindingResult result, RedirectAttributes redirect) {
 		//入力ﾁｪｯｸ

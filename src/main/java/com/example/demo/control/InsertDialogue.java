@@ -38,7 +38,7 @@ public class InsertDialogue {
 	@GetMapping
 	public String showInsertDialoguePage(Model model) {
 		//ページ作成
-		return new ModelSetter(model, ModelSetter.PAGE_CREATE_GROUP)
+		return new ModelSetter(model, ModelSetter.PAGE_INSERT_DIALOGUE)
 				
 					.setInsertUser(new InsertUserForm())
 					

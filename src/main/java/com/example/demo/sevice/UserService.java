@@ -65,9 +65,12 @@ public class UserService {
 	public void updatePassword(UserDetailsImp user, String password) {
 		userApi.updatePassword(user, password);
 	}
-
+	
+	/**
+	 * 退会する
+	 * @param user ログイン情報
+	 */
 	public void deleteUser(UserDetailsImp user) {
-		// TODO 自動生成されたメソッド・スタブ
-		
+		userApi.deleteUser(user);
 	}	
 }
