@@ -17,6 +17,11 @@ import lombok.Data;
 @Data
 public class UserDetailsImp implements UserDetails {
 	private static final long serialVersionUID = 6088431978182349464L;
+	
+	/**
+	 * 正確にはuserIdNameのこと<br>
+	 * Spring Securityの構成上こうしている
+	 */
 	private String username;
 	private String password;
 	private String tokenForServer;
