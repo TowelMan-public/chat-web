@@ -61,5 +61,10 @@ public class UserService {
 	 */
 	public void updatePassword(UserDetailsImp user, String password) {
 		userApi.updatePassword(user, password);
+	}
+
+	public void deleteUser(UserDetailsImp user) {
+		// TODO 自動生成されたメソッド・スタブ
+		
 	}	
 }
