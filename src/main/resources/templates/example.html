@@ -110,17 +110,14 @@
 							<div class="hamburger-menu">
 								<input id="ac-check_have_user" class="ac-check" type="checkbox">
 								<label class="ac-label" for="ac-check_have_user">
-									友達になれそうな一覧<div class="notice" th:if="*{allNoticeCountInDesireHaveUserList} != 0"
-														th:text="*{allNoticeCountInDesireHaveUserList}"></div>
+									友達になれそうな一覧<div class="notice" th:if="*{desireHaveUserCount} != 0"
+														th:text="*{desireHaveUserCount}"></div>
 								</label>
 								<th:block th:each="list : *{desireHaveUserList}" th:object="${list}">
 									<div class="ac-content"
 										th:attr="data-href=@{/web/desire/dialogue/{haveUserIdName}(haveUserIdName = *{userIdName})}">
 										<li><div class="see_side_content">
 											<div th:text="*{userName}"></div>
-											<div class="notice" 
-												th:if="*{noticeCount} != 0"
-												th:text="*{noticeCount}"></div>
 										</div></li>
 									</div>
 								</th:block>
@@ -130,17 +127,14 @@
 							<div class="hamburger-menu">
 								<input id="ac-check_have_user" class="ac-check" type="checkbox">
 								<label class="ac-label" for="ac-check_have_user">
-									誘われているグループ一覧<div class="notice" th:if="*{allNoticeCountInDesireGroupList} != 0"
-															th:text="*{allNoticeCountInDesireGroupList}"></div>
+									誘われているグループ一覧<div class="notice" th:if="*{desireGroupCount} != 0"
+															th:text="*{desireGroupCount}"></div>
 								</label>
 								<th:block th:each="list : *{desireGroupList}" th:object="${list}">
 									<div class="ac-content"
 										th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}">
 										<li><div class="see_side_content">
 											<div th:text="*{groupName}"></div>
-											<div class="notice" 
-												th:if="*{noticeCount} != 0"
-												th:text="*{noticeCount}"></div>
 										</div></li>
 									</div>
 								</th:block>
