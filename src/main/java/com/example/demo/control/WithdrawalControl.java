@@ -12,7 +12,7 @@ import com.example.demo.security.UserDetailsImp;
 import com.example.demo.sevice.UserService;
 
 /**
- * ユーザーページに関するURLのアクセスポイントクラス
+ * ユーザー脱退ページに関するURLのアクセスポイントクラス
  */
 @Controller
 @RequestMapping(UrlConfig.ROOT_URL + "/withdrawal")
