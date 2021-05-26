@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -62,6 +63,7 @@ public class UserControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return 表示するべきページのURLか、リダイレクト等のURL
 	 */
+	@PostMapping
 	public String updateUserIdName(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdateIdNameForm form, BindingResult result, RedirectAttributes redirect) {
 		//入力ﾁｪｯｸ
@@ -95,6 +97,7 @@ public class UserControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return 表示するべきページのURLか、リダイレクト等のURL
 	 */
+	@PostMapping
 	public String updateUserName(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdateNameForm form, BindingResult result, RedirectAttributes redirect) {
 		//入力ﾁｪｯｸ
@@ -119,6 +122,7 @@ public class UserControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return 表示するべきページのURLか、リダイレクト等のURL
 	 */
+	@PostMapping
 	public String updatePassword(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdatePasswordForm form, BindingResult result, RedirectAttributes redirect) {
 		//入力ﾁｪｯｸ

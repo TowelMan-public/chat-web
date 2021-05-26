@@ -5,6 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.ModelSetter;
 import com.example.demo.configurer.UrlConfig;
@@ -39,6 +40,7 @@ public class WithdrawalControl {
 	 * @param user ログイン情報
 	 * @return 表示するべきページのURLか、リダイレクト等のURL
 	 */
+	@PostMapping
 	public String updateUserIdName(@AuthenticationPrincipal UserDetailsImp user) {
 		userService.deleteUser(user);
 		return "redirect:" + UrlConfig.ROOT_URL + "/logout";
