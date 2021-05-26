@@ -28,7 +28,7 @@ public class WithdrawalControl {
 	 * @return 表示するべきhtmlファイルのパスか、リダイレクト等のURL
 	 */
 	@GetMapping
-	public String showUserPage(Model model) {
+	public String showWithdrawalPage(Model model) {
 		//ページ作成
 		return new ModelSetter(model, ModelSetter.PAGE_WHITHDRAWAL)
 				

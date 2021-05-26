@@ -36,7 +36,7 @@ public class InsertDialogue {
 	 * @return 表示するべきhtmlファイルのパスか、リダイレクト等のURL
 	 */
 	@GetMapping
-	public String showCreateGroupPage(Model model) {
+	public String showInsertDialoguePage(Model model) {
 		//ページ作成
 		return new ModelSetter(model, ModelSetter.PAGE_CREATE_GROUP)
 				
