@@ -2,7 +2,11 @@ package com.example.demo;
 
 import org.springframework.ui.Model;
 
+import com.example.demo.form.insert.CreateGroupForm;
 import com.example.demo.form.insert.SignupForm;
+import com.example.demo.form.update.UpdateIdNameForm;
+import com.example.demo.form.update.UpdateNameForm;
+import com.example.demo.form.update.UpdatePasswordForm;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -194,7 +198,7 @@ public class ModelSetter {
 	 * @param object セットしたいオブジェクト
 	 * @return 自分
 	 */
-	public ModelSetter setUpdateName(Object object){
+	public ModelSetter setUpdateName(UpdateNameForm object){
 		setOther("UpdateName", object);
 		return this;
 	}
@@ -206,7 +210,7 @@ public class ModelSetter {
 	 * @param object セットしたいオブジェクト
 	 * @return 自分
 	 */
-	public ModelSetter setInsertUser(Object object){
+	public ModelSetter setInsertUser(SignupForm object){
 		setOther("InsertUser", object);
 		return this;
 	}
@@ -218,7 +222,7 @@ public class ModelSetter {
 	 * @param InsertUser セットしたいオブジェクト
 	 * @return 自分
 	 */
-	public ModelSetter setUpdateIdName(Object object){
+	public ModelSetter setUpdateIdName(UpdateIdNameForm object){
 		setOther("UpdateIdName", object);
 		return this;
 	}
@@ -230,8 +234,20 @@ public class ModelSetter {
 	 * @param object セットしたいオブジェクト
 	 * @return 自分
 	 */
-	public ModelSetter setUpdatePassword(Object object){
+	public ModelSetter setUpdatePassword(UpdatePasswordForm object){
 		setOther("UpdatePassword", object);
+		return this;
+	}
+	
+	/**
+	 * Modelクラウスにオブジェクトをセットする。<br>
+	 * キー名：CreateGroup<br>
+	 * 既に同じキー名にセットされている場合はセットしない。
+	 * @param object セットしたいオブジェクト
+	 * @return 自分
+	 */
+	public ModelSetter setCreateGroup(CreateGroupForm object){
+		setOther("CreateGroup", object);
 		return this;
 	}
 	
