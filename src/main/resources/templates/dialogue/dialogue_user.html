@@ -2,11 +2,11 @@
 	<th:block th:object="${ContentModel}">
 		<h2>友達の詳細情報</h2>
 		
-		<div th:text="'ユーザーID名:' + *{haveUserIdName}"></div>
-		<div th:text="'ユーザー名:' + *{haveUserName}"></div>
+		<div th:text="'ユーザーID名:' + *{userIdName}"></div>
+		<div th:text="'ユーザー名:' + *{userName}"></div>
 		
 		<br>
-		<form th:action="@{/web/dialogue/exit/{haveUserIdName}(haveUserIdName=*{haveUserIdName})}" method="post" class="button_form"> 
+		<form th:action="@{/web/dialogue/exit/{haveUserIdName}(haveUserIdName=*{userIdName})}" method="post" class="button_form"> 
 			<input type="submit" class="delete_button" value="この友達と関係を終わる" />
 		</form>
 	</th:block>

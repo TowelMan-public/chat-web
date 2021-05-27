@@ -53,4 +53,8 @@ public class DialogueService {
 		
 		return modelList;
 	}
+
+	public void deleteHaveUser(UserDetailsImp user, String haveUserIdName) {
+		userInDialogueApi.deleteUserInDiarogue(user, haveUserIdName);
+	}
 }

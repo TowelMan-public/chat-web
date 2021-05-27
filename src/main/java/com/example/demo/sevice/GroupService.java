@@ -45,5 +45,35 @@ public class GroupService {
 		
 		return modelList;
 	}
+
+	/**
+	 * グループ名を取得する
+	 * @param user ログイン情報
+	 * @param groupTalkRoomId グループトークルームID
+	 * @return グループ名
+	 */
+	public String getGroupName(UserDetailsImp user, Integer groupTalkRoomId) {
+		return groupApi.getGroup(user, groupTalkRoomId)
+					.getGroupName();
+	}
+
+	/**
+	 * グループ名を更新する
+	 * @param user ログイン情報
+	 * @param groupTalkRoomId グループトークルームID
+	 * @param groupName グループ名
+	 */
+	public void updateGroupName(UserDetailsImp user, Integer groupTalkRoomId, String groupName) {
+		groupApi.updateGroupName(user, groupTalkRoomId, groupName);
+	}
+
+	/**
+	 * グループを削除する
+	 * @param user ログイン情報
+	 * @param groupTalkRoomId グループトークルームID
+	 */
+	public void deleteGroup(UserDetailsImp user, Integer groupTalkRoomId) {
+		groupApi.deleteGroup(user, groupTalkRoomId);
+	}
 	
 }

@@ -7,13 +7,13 @@
 			<input type="submit" class="button" value="変更" />
 		</form>
 		<br><br>
-		<form th:action="@{/web/group/delete/name/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" class="button_form"> 
+		<form th:action="@{/web/group/delete/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" class="button_form"> 
 			<input type="submit" class="delete_button" value="このグループの削除"/>
 		</form>
 		<br><br><br><br>
 		
 		<h2>グループにお誘い</h2>
-		<form th:action="@{/web/group/user/user/insert/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" th:object="${InsertUser}"> 
+		<form th:action="@{/web/group/user/insert/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" th:object="${InsertUser}"> 
 			<div>加入させたいユーザーのID名：<input type="text" name="userIdName" th:field="*{userIdName}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('userIdName')}" th:errors="*{userIdName}" /><br>
 			<input type="submit" class="button" value="勧誘" />
 		</form>
@@ -26,10 +26,10 @@
 				<th>削除</th>
 			</tr>
 			<tr th:each="list : *{userInGroupList}" th:object="${list}">
-				<td style="min-width: 8em;" th:text="*{userName}"></td>
-				<td th:text="*{userIdName}"></td>
+				<td style="min-width: 8em;" th:text="*{haveUserName}"></td>
+				<td th:text="*{haveUserIdName}"></td>
 				<td>
-					<form th:action="@{/web/group/user/user/delete/{groupTalkRoomId}/{userIdName}(groupTalkRoomId=*{groupTalkRoomId}, userIdName=*{userIdName})}" method="post" class="button_form"> 
+					<form th:action="@{/web/group/user/delete/{groupTalkRoomId}/{userIdName}(groupTalkRoomId=*{talkRoomId}, userIdName=*{haveUserIdName})}" method="post" class="button_form"> 
 						<input type="submit" class="delete_button" value="削除" />
 					</form>
 				</td>
