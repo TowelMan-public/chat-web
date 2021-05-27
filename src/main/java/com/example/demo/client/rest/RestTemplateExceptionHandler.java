@@ -1,8 +1,6 @@
 package com.example.demo.client.rest;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResponseErrorHandler;
@@ -19,6 +17,7 @@ import com.example.demo.client.exception.NotFoundException;
 import com.example.demo.client.exception.NotHaveUserException;
 import com.example.demo.client.exception.NotInsertedGroupDesireException;
 import com.example.demo.client.exception.NotJoinGroupException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.Data;
 
@@ -31,12 +30,21 @@ import lombok.Data;
  */
 public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 	
+	private ObjectMapper objectMapper;
+	
+	/**
+	 * コンストラクタ
+	 */
+	public RestTemplateExceptionHandler(){
+		objectMapper = new ObjectMapper();
+	}
+	
 	/**
 	 * エラーハンドリングするところ
 	 */
 	@Override
 	public void handleError(ClientHttpResponse error) throws IOException {
-		ErrorResponse errorResponse = getErrorResponse(error);
+		var errorResponse = getErrorResponse(error);
 		
 		//各種具体的にわかる例外を投げる・分別ができないときは他のやつ投げる
 		switch(errorResponse.getErrorCode()) {
@@ -61,10 +69,10 @@ public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 		case "BadRequestFormException":
 			throw new BadRequestFormException(errorResponse.getMessage());
 		default:
-			switch(HttpStatus.valueOf(error.getRawStatusCode())) {
-			case UNAUTHORIZED:
+			
+			if(HttpStatus.valueOf(error.getRawStatusCode()).equals(HttpStatus.UNAUTHORIZED)) {
 				throw new InvalidLoginException(errorResponse.getMessage());
-			default:
+			}else {
 				throw new RestClientResponseException(errorResponse.getMessage(), error.getStatusCode().value(),
 														errorResponse.getErrorCode(), error.getHeaders(), error.getBody().readAllBytes(), null);
 			}
@@ -81,29 +89,19 @@ public class RestTemplateExceptionHandler implements  ResponseErrorHandler{
 	}
 	
 	/**
-	 * エラーボディーを解析する
+	 * エラーレスポンスボディーを解析する
 	 */
 	private ErrorResponse getErrorResponse(ClientHttpResponse e) throws IOException {
-		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^.*\"errorCode\":\"(.*)\".*\"message\":\"(.*)\"$");
-		String bodyString = new String( e.getBody().readAllBytes());
-		Matcher matcher = pattern.matcher(bodyString);
-		if(matcher.matches()) {
-			ErrorResponse errorResponse = new ErrorResponse();
-			errorResponse.setErrorCode(matcher.group(1));
-			errorResponse.setMessage(matcher.group(2));
-			return errorResponse;
-		}else {
-			return new ErrorResponse();
-		}
+		var bodyString = new String( e.getBody().readAllBytes());
+		return objectMapper.readValue(bodyString, ErrorResponse.class);
 	}
 	
+	/**
+	 * エラーレスポンスボディー
+	 */
 	@Data
-	private class ErrorResponse {
+	static class ErrorResponse {
 		private String errorCode;
 	    private String message;
-	    
-	    public ErrorResponse() {
-	    	errorCode = "NULL";
-	    }
 	}
 }

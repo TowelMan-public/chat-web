@@ -4,23 +4,23 @@
 		
 		<h3>ユーザー名の変更</h3>
 		<form th:action="@{/web/user/update/name}" method="post" th:object="${UpdateName}"> 
-			<div>ユーザー名：<input type="text" name="name" th:field="*{name}"/></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+			<div>ユーザー名：<input type="text" name="name" th:field="*{name}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
 			<input type="submit" class="button" value="変更" />
 		</form>
 		<br><br>
 		
 		<h3>ユーザーID名の変更</h3>
 		<form th:action="@{/web/user/update/id}" method="post" th:object="${UpdateIdName}"> 
-			<div>ユーザーID名：<input type="text" name="idName" th:field="*{idName}"/></div> <div th:if="${#fields.hasErrors('idName')}" th:errors="*{idName}" /><br>
+			<div>ユーザーID名：<input type="text" name="idName" th:field="*{idName}"/></div> <divclass="validation_message"  th:if="${#fields.hasErrors('idName')}" th:errors="*{idName}" /><br>
 			<input type="submit" class="button" value="変更" />
 		</form>
 		<br><br>
 		
 		<h3>パスワードの変更</h3>
 		<form th:action="@{/web/user/update/password}" method="post" th:object="${UpdatePassword}"> 
-			<div th:if="${#fields.hasErrors('notMatchesPassword')}" th:field="*{notMatchesPassword}" th:errors="*{notMatchesPassword}"></div>
-			<div>パスワード：<input type="password" name="password" th:field="*{password}"/></div> <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" /><br>
-			<div>パスワード（もう一回）：<input type="password" name="oneMorePassword" th:field="*{oneMorePassword}"/></div> <div th:if="${#fields.hasErrors('oneMorePassword')}" th:errors="*{oneMorePassword}" /><br>
+			<div class="validation_message" th:if="${#fields.hasErrors('notMatchesPassword')}" th:field="*{notMatchesPassword}" th:errors="*{notMatchesPassword}"></div>
+			<div>パスワード：<input type="password" name="password" th:field="*{password}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" /><br>
+			<div>パスワード（もう一回）：<input type="password" name="oneMorePassword" th:field="*{oneMorePassword}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('oneMorePassword')}" th:errors="*{oneMorePassword}" /><br>
 			<input type="submit" class="button" value="変更" />
 		</form>
 		

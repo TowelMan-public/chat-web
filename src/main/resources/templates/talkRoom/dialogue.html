@@ -93,7 +93,7 @@
 		</div>
 		<div class="chat_send_message_box">
 			<form th:action="@{/web/dialogue/talk/insert/{haveUserIdName}(haveUserIdName = *{haveUserIdName})}" method="post" action="#" th:object="${InsertTalkForm}">
-				<div><textarea cols="50" rows="5" name="talkContent" th:field="*{talkContent}"></textarea></div> <div th:if="${#fields.hasErrors('talkContent')}" th:errors="*{talkContent}" />
+				<div><textarea cols="50" rows="5" name="talkContent" th:field="*{talkContent}"></textarea></div> <div class="validation_message" th:if="${#fields.hasErrors('talkContent')}" th:errors="*{talkContent}" />
 				<input type="submit" value="送信" class="button" />
 			</form>
 		</div>

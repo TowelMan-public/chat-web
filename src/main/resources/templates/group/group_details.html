@@ -3,7 +3,7 @@
 		<h2>グループの詳細</h2>
 		
 		<form th:action="@{/web/group/update/name/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" th:object="${UpdateName}"> 
-			<div>グループ名：<input type="text" name="name" th:field="*{name}"/></div> <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
+			<div>グループ名：<input type="text" name="name" th:field="*{name}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" /><br>
 			<input type="submit" class="button" value="変更" />
 		</form>
 		<br><br>
@@ -14,7 +14,7 @@
 		
 		<h2>グループにお誘い</h2>
 		<form th:action="@{/web/group/user/user/insert/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}" method="post" th:object="${InsertUser}"> 
-			<div>加入させたいユーザーのID名：<input type="text" name="userIdName" th:field="*{userIdName}"/></div> <div th:if="${#fields.hasErrors('userIdName')}" th:errors="*{userIdName}" /><br>
+			<div>加入させたいユーザーのID名：<input type="text" name="userIdName" th:field="*{userIdName}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('userIdName')}" th:errors="*{userIdName}" /><br>
 			<input type="submit" class="button" value="勧誘" />
 		</form>
 		<br><br>
