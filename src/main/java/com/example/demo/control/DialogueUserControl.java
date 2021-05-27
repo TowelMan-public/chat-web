@@ -34,7 +34,7 @@ public class DialogueUserControl {
 	 * @param haveUserIdName 友達のユーザーID名
 	 * @return 表示するべきHTMLファイルのパスか、リダイレクト等のURL
 	 */
-	@GetMapping("{haveUserIdName}")
+	@GetMapping("/user/{haveUserIdName}")
 	public String showDialogueUserPage(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("haveUserIdName") String haveUserIdName, Model model) {
 		//ページ作成
 		return new ModelSetter(model, ModelSetter.PAGE_DIALOGUE_USER)

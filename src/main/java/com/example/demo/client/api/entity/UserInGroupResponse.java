@@ -7,8 +7,8 @@ import lombok.Data;
  */
 @Data
 public class UserInGroupResponse {
-	private String haveUserIdName;
-	private String haveUserName;
 	private Integer talkRoomId;
 	private Integer lastTalkIndex;
+	private String userIdName;
+	private String userName;
 }
