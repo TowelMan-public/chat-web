@@ -52,7 +52,7 @@ public class GroupApi {
 			{
 		final String URL = ROOT_URL + "/gets";
 		
-		return restTemplateAdapter.getForObjectsWhenLogined(URL, null, GroupTalkRoomResponse.class, user);
+		return restTemplateAdapter.getForListWhenLogined(URL, null, GroupTalkRoomResponse[].class, user);
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class GroupApi {
 		dto.setStartIndex(startIndex);
 		dto.setMaxSize(maxSize);
 		
-		return restTemplateAdapter.getForObjectsWhenLogined(URL, dto, TalkResponse.class, user);
+		return restTemplateAdapter.getForListWhenLogined(URL, dto, TalkResponse[].class, user);
 	}
 	
 	/**

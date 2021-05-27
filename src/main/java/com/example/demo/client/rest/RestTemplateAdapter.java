@@ -1,18 +1,17 @@
 package com.example.demo.client.rest;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
 import com.example.demo.security.UserDetailsImp;
 
 /**
@@ -26,7 +25,7 @@ public class RestTemplateAdapter {
 	RestTemplateExceptionHandler restTemplateExceptionHandler;
 	
 	private final RestTemplate restTemplate;
-
+	
 	/**
 	 * デフォルトコンストラクタ<br>
 	 * RestTemplateの設定を行う<br>
@@ -92,16 +91,16 @@ public class RestTemplateAdapter {
 	
 	/**
 	 * 認証されているときに使うGETメソッド実行メソッド<br>
-	 * レスポンスボディーがList<<?>の時用
+	 * レスポンスボディーがList<?>の時用
 	 * @param <R> リクエストボディーのクラス型
-	 * @param <T> レスポンスボディーのクラス型
+	 * @param <T> レスポンスボディーの配列のクラス型
 	 * @param url apiのURL
 	 * @param requestBody リクエストボディー
-	 * @param responseBodyClass レスポンスボディーのクラス型
+	 * @param responseBodyClass レスポンスボディーの配列のクラス型
 	 * @param user ユーザー情報（認証用トークンを取得するため）
 	 * @return <T>に指定されたレスポンスボディーのList
 	 */
-	public <R,T> List<T> getForObjectsWhenLogined(String url, R requestBody, Class<T> oneOfResponseBodyClass,UserDetailsImp user) {		
+	public <R,T> List<T> getForListWhenLogined(String url, R requestBody, Class<T[]> oneOfresponseBodyClass,UserDetailsImp user) {
 		//リクエスト作成
 		RequestEntity<Void> requestEntity = 
 		        RequestEntity
@@ -111,8 +110,8 @@ public class RestTemplateAdapter {
 		          .build();
 		
 		//実行
-		ResponseEntity<List<T>> responseEntity = restTemplate.exchange(requestEntity, new ParameterizedTypeReference<List<T>>() {});
-		return responseEntity.getBody();
+		return Arrays.asList(
+				restTemplate.exchange(requestEntity, oneOfresponseBodyClass).getBody());
 	}
 	
 	/**

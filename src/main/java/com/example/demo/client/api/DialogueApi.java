@@ -42,7 +42,7 @@ public class DialogueApi {
 		dto.setStartIndex(startIndex);
 		dto.setMaxSize(maxSize);
 		
-		return restTemplateAdapter.getForObjectsWhenLogined(URL, dto, TalkResponse.class, user);
+		return restTemplateAdapter.getForListWhenLogined(URL, dto, TalkResponse[].class, user);
 	}
 	
 	/**

@@ -61,7 +61,7 @@ public class UserInGroupApi {
 		var dto = new Dto();
 		dto.setTalkRoomId(groupTalkRoomId);
 		
-		return restTemplateAdapter.getForObjectsWhenLogined(URL, dto, UserInGroupResponse.class, user);
+		return restTemplateAdapter.getForListWhenLogined(URL, dto, UserInGroupResponse[].class, user);
 	}
 
 	/**

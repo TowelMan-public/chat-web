@@ -32,7 +32,7 @@ public class UserInDialogueApi {
 	public List<HaveUserResponse> getUserInDiarogueList(UserDetailsImp user) {
 		final String URL = ROOT_URL + "/gets";
 		
-		return restTemplateAdapter.getForObjectsWhenLogined(URL, null, HaveUserResponse.class, user);
+		return restTemplateAdapter.getForListWhenLogined(URL, null, HaveUserResponse[].class, user);
 	}
 	
 	/**

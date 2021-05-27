@@ -45,6 +45,8 @@ public class DialogueService {
 		List<HaveUserResponse> responceList = userInDialogueApi.getUserInDiarogueList(user);
 		List<HaveUserModel> modelList = new ArrayList<>();
 		
+		
+		
 		//処理
 		for(HaveUserResponse response : responceList)
 			modelList.add(new HaveUserModel(response));

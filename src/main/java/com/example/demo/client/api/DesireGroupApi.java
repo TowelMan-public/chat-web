@@ -32,7 +32,7 @@ public class DesireGroupApi {
 	public List<DesireUserInGroupResponce> getDesireUser(UserDetailsImp user) {
 		final String URL = ROOT_URL + "/gets";
 		
-		return restTemplateAdapter.getForObjectsWhenLogined(URL, null, DesireUserInGroupResponce.class, user);
+		return restTemplateAdapter.getForListWhenLogined(URL, null, DesireUserInGroupResponce[].class, user);
 	}
 	
 	/**

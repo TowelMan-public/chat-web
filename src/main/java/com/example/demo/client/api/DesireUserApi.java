@@ -30,7 +30,7 @@ public class DesireUserApi {
 	public List<DesireHaveUserResponse> getDesireUser(UserDetailsImp user) {
 		final String URL = ROOT_URL + "/gets";
 		
-		return restTemplateAdapter.getForObjectsWhenLogined(URL, null, DesireHaveUserResponse.class, user);
+		return restTemplateAdapter.getForListWhenLogined(URL, null, DesireHaveUserResponse[].class, user);
 	}
 	
 	/**
