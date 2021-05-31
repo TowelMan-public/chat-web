@@ -5,7 +5,7 @@
 				<input id="ac-check2" class="ac-check" type="checkbox">
 				<label class="ac-label" for="ac-check2" th:text="*{groupName}"></label>
 				<div class="ac-content">
-					<li><a th:href="@{/web/group/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}">グループの詳細</a></li>
+					<li><a th:href="@{/web/group/details/{groupTalkRoomId}(groupTalkRoomId=*{groupTalkRoomId})}">グループの詳細</a></li>
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		<div class="chat_send_message_box">
-			<form th:action="@{/web/group/talk/insert/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}" method="post" action="#" th:object="${InsertTalkForm}">
+			<form th:action="@{/web/group/talk/insert/{groupTalkRoomId}(groupTalkRoomId = ${ContentModel.getGroupTalkRoomId})}" method="post" action="#" th:object="${InsertTalkForm}">
 				<div><textarea cols="50" rows="5" name="talkContent" th:field="*{talkContent}"></textarea></div> <div class="validation_message" th:if="${#fields.hasErrors('talkContent')}" th:errors="*{talkContent}" />
 				<input type="submit" value="送信" class="button" />
 			</form>

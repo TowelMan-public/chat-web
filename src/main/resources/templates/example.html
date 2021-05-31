@@ -37,17 +37,17 @@
 									友達一覧<div class="notice" th:if="*{allNoticeCountInHaveUserList} != 0" 
 											th:text="*{allNoticeCountInHaveUserList}"></div>
 								</label>
-								<th:block th:each="list : *{haveUserList}" th:object="${list}">
-									<div class="ac-content"
-										th:attr="data-href=@{/web/dialogue/{haveUserIdName}(haveUserIdName = *{userIdName})}">
-										<li><div class="see_side_content">
+								<div class="ac-content">
+									<li th:each="list : *{haveUserList}" th:object="${list}">
+										<div class="see_side_content"
+											th:attr="data-href=@{/web/dialogue/{haveUserIdName}(haveUserIdName = *{userIdName})}">
 											<div th:text="*{userName}"></div>
 											<div class="notice" 
 												th:if="*{noticeCount} != 0"
 												th:text="*{noticeCount}"></div>
-										</div></li>
-									</div>
-								</th:block>
+										</div>
+									</li>
+								</div>
 							</div>
 						</div>
 						<div class="see_side_title">
@@ -57,17 +57,17 @@
 									グループ一覧<div class="notice" th:if="*{allNoticeCountInGroupList} != 0" 
 												th:text="*{allNoticeCountInGroupList}"></div>
 								</label>
-								<th:block th:each="list : *{groupList}" th:object="${list}">
-									<div class="ac-content"
-										th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}">
-										<li><div class="see_side_content">
+								<div class="ac-content">
+									<li th:each="list : *{groupList}" th:object="${list}">
+										<div class="see_side_content"
+											th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}">
 											<div th:text="*{groupName}"></div>
 											<div class="notice" 
 												th:if="*{noticeCount} != 0"
 												th:text="*{noticeCount}"></div>
-										</div></li>
-									</div>
-								</th:block>
+										</div>
+									</li>
+								</div>
 							</div>
 						</div>
 						<div class="see_side_title">
@@ -77,14 +77,14 @@
 									友達になれそうな一覧<div class="notice" th:if="*{desireHaveUserCount} != 0"
 														th:text="*{desireHaveUserCount}"></div>
 								</label>
-								<th:block th:each="list : *{desireHaveUserList}" th:object="${list}">
-									<div class="ac-content"
-										th:attr="data-href=@{/web/desire/dialogue/{haveUserIdName}(haveUserIdName = *{haveUserIdName})}">
-										<li><div class="see_side_content">
+								<div class="ac-content">
+									<li th:each="list : *{desireHaveUserList}" th:object="${list}">
+										<div class="see_side_content"
+											th:attr="data-href=@{/web/desire/dialogue/{haveUserIdName}(haveUserIdName = *{haveUserIdName})}">
 											<div th:text="*{haveUserName}"></div>
-										</div></li>
-									</div>
-								</th:block>
+										</div>
+									</li>
+								</div>
 							</div>
 						</div>
 						<div class="see_side_title">
@@ -94,14 +94,14 @@
 									誘われているグループ一覧<div class="notice" th:if="*{desireGroupCount} != 0"
 															th:text="*{desireGroupCount}"></div>
 								</label>
-								<th:block th:each="list : *{desireGroupList}" th:object="${list}">
-									<div class="ac-content"
-										th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{groupTalkRoomId})}">
-										<li><div class="see_side_content">
+								<div class="ac-content">
+									<li th:each="list : *{desireGroupList}" th:object="${list}">
+										<div class="see_side_content"
+											th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{talkRoomId})}">
 											<div th:text="*{groupName}"></div>
-										</div></li>
-									</div>
-								</th:block>
+										</div>
+									</li>
+								</div>
 							</div>
 						</div>
 					</div>
