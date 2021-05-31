@@ -41,7 +41,7 @@ public class DialogueControl {
 		return new ModelSetter(model, ModelSetter.PAGE_DIALOGUE)
 				
 					.setContentModel(
-							dialogueService.getDialogueTalks(user, haveUserIdName, 5))
+							dialogueService.getDialogueTalks(user, haveUserIdName, 50))
 					
 					.setInsertTalkForm(new InsertTalkForm())
 					
@@ -95,7 +95,7 @@ public class DialogueControl {
 		return new ModelSetter(model, ModelSetter.FRAGMENT_DIALOGUE)
 				
 					.setContentModel(
-							dialogueService.getNextDialogueTalks(user, haveUserIdName, form.getStartIndex(), 50))
+							dialogueService.getNextDialogueTalks(user, haveUserIdName, form.getStartIndex(), 25))
 					
 					.buildAndReturnUrl();
 	}
@@ -122,7 +122,7 @@ public class DialogueControl {
 		return new ModelSetter(model, ModelSetter.FRAGMENT_DIALOGUE)
 				
 					.setContentModel(
-							dialogueService.getBackDialogueTalks(user, haveUserIdName, form.getStartIndex(), 50))
+							dialogueService.getBackDialogueTalks(user, haveUserIdName, form.getStartIndex(), 25))
 					
 					.buildAndReturnUrl();
 	}

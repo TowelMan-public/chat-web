@@ -108,19 +108,19 @@ public class ModelSetter {
 	 * グループトークリストのフラグメント
 	 */
 	public static final WebSeeContentType FRAGMENT_GROUP = new WebSeeContentType (null,
-			"talkRoom/group_talk_list_fragment::group_talk_list_fragment(ContentModel)");
+			"talkRoom/group_talk_list_fragment::group_talk_list_fragment");
 	
 	/**
 	 * 友達申請してる相手のトークリストのフラグメント
 	 */
 	public static final WebSeeContentType FRAGMENT_DESIRE_DIALOGUE = new WebSeeContentType (null,
-			"talkRoom/desire_dialogue_talk_list_fragment::desire_dialogue_talk_list_fragment(ContentModel)");
+			"talkRoom/desire_dialogue_talk_list_fragment::desire_dialogue_talk_list_fragment");
 	
 	/**
 	 * グループに加入してほしい申請が出されてるグループのトークリストのフラグメント
 	 */
 	public static final WebSeeContentType FRAGMENT_DESIRE_GROUP = new WebSeeContentType (null,
-			"talkRoom/desire_group_talk_list_fragment::desire_group_talk_list_fragment(ContentModel)");
+			"talkRoom/desire_group_talk_list_fragment::desire_group_talk_list_fragment");
 	
 	/**
 	 * コンストラクタ<br>

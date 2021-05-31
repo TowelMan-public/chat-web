@@ -115,10 +115,10 @@ public class DialogueService {
 
 	/**
 	 * 友達トークリストをstartIndexに指定されたインデクス以降から取得する
-	 * @param user
-	 * @param haveUserIdName
-	 * @param startIndex
-	 * @param maxSize
+	 * @param user ログイン情報
+	 * @param haveUserIdName 友達申請を出しているユーザーのID名
+	 * @param startIndex 読み込んだ一番最初のトークインデックス
+	 * @param maxSize 最大件数
 	 * @return 友達トークリスト
 	 */
 	public DialogueModel getNextDialogueTalks(UserDetailsImp user, String haveUserIdName, Integer startIndex, Integer maxSize) {
@@ -143,10 +143,10 @@ public class DialogueService {
 
 	/**
 	 * 友達トークリストをfinishIndex以前から取得する
-	 * @param user
-	 * @param haveUserIdName
-	 * @param finishIndex
-	 * @param maxSize
+	 * @param user ログイン情報
+	 * @param haveUserIdName 友達申請を出しているユーザーのID名
+	 * @param finishIndex 読み込んだ最後のトークインデックス
+	 * @param maxSize 最大件数
 	 * @return 友達トークリスト
 	 */
 	public DialogueModel getBackDialogueTalks(UserDetailsImp user, String haveUserIdName, Integer finishIndex, Integer maxSize) {
