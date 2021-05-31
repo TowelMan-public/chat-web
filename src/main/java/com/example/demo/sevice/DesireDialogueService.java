@@ -23,6 +23,6 @@ public class DesireDialogueService {
 	 * @return 友達追加申請者リスト
 	 */
 	public List<DesireHaveUserResponse> getDesireHaveUserList(UserDetailsImp user) {
-		return desireUserApi.getDesireUser(user);
+		return desireUserApi.getDesireUserList(user);
 	}
 }

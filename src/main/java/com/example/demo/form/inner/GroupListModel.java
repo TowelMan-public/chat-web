@@ -11,6 +11,7 @@ public class GroupListModel {
 	private Integer groupTalkRoomId;
 	private String groupName;
 	private Integer noticeCount;
+	private Integer myLastTalkIndex;
 	
 	/**
 	 * コンストラクタ
@@ -19,6 +20,7 @@ public class GroupListModel {
 	public GroupListModel(GroupTalkRoomResponse responce) {
 		this.groupTalkRoomId = responce.getTalkRoomId();
 		this.groupName = responce.getGroupName();
+		this.myLastTalkIndex = responce.getUserLastTalkIndex();
 		this.noticeCount = responce.getGroupLastTalkIndex() - responce.getUserLastTalkIndex();
 	}
 }

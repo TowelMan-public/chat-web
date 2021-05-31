@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.ui.Model;
 
 import com.example.demo.form.insert.CreateGroupForm;
+import com.example.demo.form.insert.InsertTalkForm;
 import com.example.demo.form.insert.InsertUserForm;
 import com.example.demo.form.insert.SignupForm;
 import com.example.demo.form.update.UpdateIdNameForm;
@@ -101,7 +102,7 @@ public class ModelSetter {
 	 * 友達トークリストのフラグメント
 	 */
 	public static final WebSeeContentType FRAGMENT_DIALOGUE = new WebSeeContentType (null,
-			"talkRoom/dialogue_talk_list_fragment::dialogue_talk_list_fragment(ContentModel)");
+			"talkRoom/dialogue_talk_list_fragment::dialogue_talk_list_fragment");
 	
 	/**
 	 * グループトークリストのフラグメント
@@ -175,7 +176,7 @@ public class ModelSetter {
 	 * @param object セットしたいオブジェクト
 	 * @return 自分
 	 */
-	public ModelSetter setInsertTalkForm(Object object){
+	public ModelSetter setInsertTalkForm(InsertTalkForm object){
 		setOther("InsertTalkForm", object);
 		return this;
 	}

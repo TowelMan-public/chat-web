@@ -29,10 +29,27 @@ public class DesireGroupApi {
 	 * @param user ログイン情報
 	 * @return グループに加入してほしい申請リスト
 	 */
-	public List<DesireUserInGroupResponce> getDesireUser(UserDetailsImp user) {
+	public List<DesireUserInGroupResponce> getDesireUserList(UserDetailsImp user) {
 		final String URL = ROOT_URL + "/gets";
 		
 		return restTemplateAdapter.getForListWhenLogined(URL, null, DesireUserInGroupResponce[].class, user);
+	}
+	
+	/**
+	 * グループに加入してほしい申請を取得する
+	 * @param user ログイン情報
+	 * @param talkRoomId グループトークルーム
+	 * @return グループに加入してほしい申請
+	 * @throws NotFoundException
+	 */
+	public List<DesireUserInGroupResponce> getDesireUser(UserDetailsImp user, Integer talkRoomId)
+			throws NotFoundException{
+		final String URL = ROOT_URL + "/get";
+		
+		var dto = new Dto();
+		dto.setTalkRoomId(talkRoomId);
+		
+		return restTemplateAdapter.getForListWhenLogined(URL, dto, DesireUserInGroupResponce[].class, user);
 	}
 	
 	/**

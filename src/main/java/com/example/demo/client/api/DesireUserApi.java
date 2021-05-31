@@ -27,10 +27,27 @@ public class DesireUserApi {
 	 * @param user ログイン情報
 	 * @return 友達追加申請リスト
 	 */
-	public List<DesireHaveUserResponse> getDesireUser(UserDetailsImp user) {
+	public List<DesireHaveUserResponse> getDesireUserList(UserDetailsImp user) {
 		final String URL = ROOT_URL + "/gets";
 		
 		return restTemplateAdapter.getForListWhenLogined(URL, null, DesireHaveUserResponse[].class, user);
+	}
+	
+	/**
+	 * 友達追加申請を取得するAPi
+	 * @param user ログイン情報
+	 * @param haveUserIdName 友達のユーザーID名
+	 * @return 友達追加申請
+	 * @throws NotFoundException
+	 */
+	public DesireHaveUserResponse getDesireUser(UserDetailsImp user, String haveUserIdName) 
+			throws NotFoundException{
+		final String URL = ROOT_URL + "/get";
+		
+		var dto = new Dto();
+		dto.setUserIdName(haveUserIdName);
+		
+		return restTemplateAdapter.getForObjectWhenLogined(URL, dto, DesireHaveUserResponse.class, user);
 	}
 	
 	/**

@@ -1,51 +1,5 @@
 <th:block th:fragment="desire_dialogue(ContentModel)">
 	<th:block th:object="${ContentModel}">
-		<script>
-			$("div#talk_list_next").click(function(event) {
-				event.preventDefault();
-				var paramUrl = $(this).attr("ajax-href") + '?' + "startIndex=" + $(this).attr("ajax-index");
-
-				// トークリストに関するfragment(html)取得
-				$.ajax({
-					type : "GET",
-					url : paramUrl,
-					dataType : "html",
-					success : function(data, status, xhr) {
-						$('talk_list_next').remove();
-						
-						var  element = document.querySelector('talk_list');
-						element.innerHTML = element.innerHTML + data;
-					},
-					error : function(XMLHttpRequest, status, errorThrown) {
-						// エラー処理 何もしない
-					}
-				});
-			});
-		</script>
-		
-		<script>
-
-			$("div#talk_list_back").click(function(event) {
-				event.preventDefault();
-				var paramUrl = $(this).attr("ajax-href") + '?' + "startIndex=" + $(this).attr("ajax-index");
-
-				// トークリストに関するfragment(html)取得
-				$.ajax({
-					type : "GET",
-					url : paramUrl,
-					dataType : "html",
-					success : function(data, status, xhr) {
-						$('talk_list_back').remove();
-						
-						var  element = document.querySelector('talk_list');
-						element.innerHTML = data + element.innerHTML;
-					},
-					error : function(XMLHttpRequest, status, errorThrown) {
-						// エラー処理 何もしない
-					}
-				});
-			});
-		</script>
 		<div class="chat_header">
 			<div class="hamburger-menu chat_header_title">
 				<input id="ac-check2" class="ac-check" type="checkbox">
@@ -68,6 +22,7 @@
 			<div class="chat_list_inner" id="talk_list">
 				
 				<div id="talk_list_back"
+					onclick="load_talk_list_back()"
 					th:attr="
 						ajax-href=@{/load/desire/dialogue/{haveUserIdName}/back(haveUserIdName=*{haveUserIdName})}
 						ajax-index=*{firstIndex} - 1">
@@ -92,6 +47,7 @@
 					</div>
 				</th:block>
 				<div id="talk_list_next"
+					onclick="load_talk_list_next()"
 					th:attr="
 						ajax-href=@{/load/desire/dialogue/{haveUserIdName}/next(haveUserIdName=*{haveUserIdName})}
 						ajax-index=*{finalIndex} + 1">

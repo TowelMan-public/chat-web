@@ -2,6 +2,7 @@
 	<th:block th:object="${ContentModel}">
 		<div id="talk_list_back"
 			th:if="*{firstIndex} != null"
+			onclick="load_talk_list_back()"
 			th:attr="
 				ajax-href=@{/load/desire/dialogue/{haveUserIdName}/back(haveUserIdName=*{haveUserIdName})}
 				ajax-index=*{firstIndex} - 1">
@@ -26,6 +27,7 @@
 		</th:block>
 		<div id="talk_list_next"
 			th:if="*{finalIndex} != null"
+			onclick="load_talk_list_next()"
 			th:attr="
 				ajax-href=@{/load/desire/dialogue/{haveUserIdName}/next(haveUserIdName=*{haveUserIdName})}
 				ajax-index=*{finalIndex} + 1">

@@ -64,7 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 静的リソースに対するアクセスはセキュリティ設定を無視する
         web
         	.ignoring()
-        		.antMatchers("/style.css");
+        		.antMatchers("/style.css")
+        		.antMatchers("/script.js");
     }
 	
 	/**

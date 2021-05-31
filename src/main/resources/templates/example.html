@@ -5,45 +5,9 @@
 		<title>チャット♪</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-		<link rel="stylesheet" type="text/css" href="style.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script>
-			jQuery( function($) {
-			    $('tbody td[data-href]').addClass('clickable').click( function() {
-			        window.location = $(this).attr('data-href');
-			    }).find('a').hover( function() {
-			        $(this).parents('td').unbind('click');
-			    }, function() {
-			        $(this).parents('td').click( function() {
-			            window.location = $(this).attr('data-href');
-			        });
-			    });
-			});
-			
-			jQuery( function($) {
-			    $('tbody th[data-href]').addClass('clickable').click( function() {
-			        window.location = $(this).attr('data-href');
-			    }).find('a').hover( function() {
-			        $(this).parents('th').unbind('click');
-			    }, function() {
-			        $(this).parents('th').click( function() {
-			            window.location = $(this).attr('data-href');
-			        });
-			    });
-			});
-			
-			jQuery( function($) {
-			    $('body div[data-href]').addClass('clickable').click( function() {
-			        window.location = $(this).attr('data-href');
-			    }).find('a').hover( function() {
-			        $(this).parents('div').unbind('click');
-			    }, function() {
-			        $(this).parents('div').click( function() {
-			            window.location = $(this).attr('data-href');
-			        });
-			    });
-			});
-		</script>
+		<script th:src="@{/script.js}"></script>
+		<script>set_date_href_script();</script>
 	</head>
 	
 	<body>
@@ -145,7 +109,7 @@
 			</div>
 			<div class="see_contents">
 				<th:brock
-					th:if="${WebSeeContentType}=='dialigue'"
+					th:if="${WebSeeContentType}=='dialogue'"
 				 	th:insert="talkRoom/dialogue::dialogue(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
 				 <th:brock
 					th:if="${WebSeeContentType}=='group'"

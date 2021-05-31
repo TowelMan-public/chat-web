@@ -36,6 +36,24 @@ public class UserInDialogueApi {
 	}
 	
 	/**
+	 * 友達を取得する
+	 * @param user ログイン情報
+	 * @param haveUserIdName 友達のユーザーID名
+	 * @return 友達
+	 * @throws NotFoundException
+	 * @throws NotHaveUserException
+	 */
+	public HaveUserResponse getUserInDiarogue(UserDetailsImp user, String haveUserIdName) 
+			throws NotFoundException, NotHaveUserException{
+		final String URL = ROOT_URL + "/get";
+		
+		var dto = new Dto();
+		dto.setUserIdName(haveUserIdName);
+		
+		return restTemplateAdapter.getForObjectWhenLogined(URL, dto, HaveUserResponse.class, user);
+	}
+	
+	/**
 	 * 友達追加をするAPI
 	 * @param user ログイン情報
 	 * @param userIdName ユーザーID名

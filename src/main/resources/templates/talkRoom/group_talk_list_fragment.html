@@ -2,6 +2,7 @@
 	<th:block th:object="${ContentModel}">
 		<div id="talk_list_back"
 			th:if="*{firstIndex} != null"
+			onclick="load_talk_list_back()"
 			th:attr="
 				ajax-href=@{/load/group/{groupTalkRoomId}/back(groupTalkRoomId=*{groupTalkRoomId})}
 				ajax-index=*{firstIndex} - 1">
@@ -18,15 +19,16 @@
 			</div>
 			
 			<div class="chat_message_me"
-				th:if="*{isMyTalk}"
-				th:attr="data-href=@{/web/group/talk/{groupTalkRoomId}/{talkIndex}(groupTalkRoomId = ${ContentModel.getGroupTalkRoomId()}, talkIndex = *{talkIndex})}">
+				th:if="*{isMyTalk}">
 				
-				<div class="chat_message_text_me" th:text="*{talkContent}">	</div>
+				<div class="chat_message_text_me" th:text="*{talkContent}"
+					th:attr="data-href=@{/web/group/talk/{groupTalkRoomId}/{talkIndex}(groupTalkRoomId = ${ContentModel.getGroupTalkRoomId()}, talkIndex = *{talkIndex})}">	</div>
 				<div class="chat_message_date" th:text="*{dateString}">	</div>
 			</div>
 		</th:block>
 		<div id="talk_list_next"
 			th:if="*{finalIndex} != null"
+			onclick="load_talk_list_next()"
 			th:attr="
 				ajax-href=@{/load/group/{groupTalkRoomId}/next(groupTalkRoomId=*{groupTalkRoomId})}
 				ajax-index=*{finalIndex} + 1">

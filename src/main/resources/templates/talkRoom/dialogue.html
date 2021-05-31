@@ -1,51 +1,5 @@
 <th:block th:fragment="dialogue(ContentModel, InsertTalkForm)">
 	<th:block th:object="${ContentModel}">
-		<script>
-			$("div#talk_list_next").click(function(event) {
-				event.preventDefault();
-				var paramUrl = $(this).attr("ajax-href") + '?' + "startIndex=" + $(this).attr("ajax-index");
-
-				// トークリストに関するfragment(html)取得
-				$.ajax({
-					type : "GET",
-					url : paramUrl,
-					dataType : "html",
-					success : function(data, status, xhr) {
-						$('talk_list_next').remove();
-						
-						var  element = document.querySelector('talk_list');
-						element.innerHTML = element.innerHTML + data;
-					},
-					error : function(XMLHttpRequest, status, errorThrown) {
-						// エラー処理 何もしない
-					}
-				});
-			});
-		</script>
-		
-		<script>
-
-			$("div#talk_list_back").click(function(event) {
-				event.preventDefault();
-				var paramUrl = $(this).attr("ajax-href") + '?' + "startIndex=" + $(this).attr("ajax-index");
-
-				// トークリストに関するfragment(html)取得
-				$.ajax({
-					type : "GET",
-					url : paramUrl,
-					dataType : "html",
-					success : function(data, status, xhr) {
-						$('talk_list_back').remove();
-						
-						var  element = document.querySelector('talk_list');
-						element.innerHTML = data + element.innerHTML;
-					},
-					error : function(XMLHttpRequest, status, errorThrown) {
-						// エラー処理 何もしない
-					}
-				});
-			});
-		</script>
 		<div class="chat_header">
 			<div class="hamburger-menu chat_header_title">
 				<input id="ac-check2" class="ac-check" type="checkbox">
@@ -59,8 +13,9 @@
 			<div class="chat_list_inner" id="talk_list">
 				
 				<div id="talk_list_back"
+					onclick="load_talk_list_back()"
 					th:attr="
-						ajax-href=@{/load/dialogue/{haveUserIdName}/back(haveUserIdName=*{haveUserIdName})}
+						ajax-href=@{/load/dialogue/{haveUserIdName}/back(haveUserIdName=*{haveUserIdName})} ,
 						ajax-index=*{firstIndex} - 1">
 						
 					<div class="talk_list_back_load talk_list_load">&#8679;</div>
@@ -75,16 +30,17 @@
 					</div>
 					
 					<div class="chat_message_me"
-						th:if="*{isMyTalk}"
-						th:attr="data-href=@{/web/dialogue/talk/{haveUserIdName}/{talkIndex}(haveUserIdName = ${ContentModel.getHaveUserIdName()}, talkIndex = *{talkIndex})}">
+						th:if="*{isMyTalk}">
 						
-						<div class="chat_message_text_me" th:text="*{talkContent}">	</div>
+						<div class="chat_message_text_me" th:text="*{talkContent}"
+							th:attr="data-href=@{/web/dialogue/talk/{haveUserIdName}/{talkIndex}(haveUserIdName = ${ContentModel.getHaveUserIdName()}, talkIndex = *{talkIndex})}">	</div>
 						<div class="chat_message_date" th:text="*{dateString}">	</div>
 					</div>
 				</th:block>
 				<div id="talk_list_next"
+					onclick="load_talk_list_next()"
 					th:attr="
-						ajax-href=@{/load/dialogue/{haveUserIdName}/next(haveUserIdName=*{haveUserIdName})}
+						ajax-href=@{/load/dialogue/{haveUserIdName}/next(haveUserIdName=*{haveUserIdName})} ,
 						ajax-index=*{finalIndex} + 1">
 						
 					<div class="talk_list_next_load talk_list_load">&#8681;</div>
@@ -92,10 +48,11 @@
 			</div>
 		</div>
 		<div class="chat_send_message_box">
-			<form th:action="@{/web/dialogue/talk/insert/{haveUserIdName}(haveUserIdName = *{haveUserIdName})}" method="post" action="#" th:object="${InsertTalkForm}">
+			<form th:action="@{/web/dialogue/talk/insert/{haveUserIdName}(haveUserIdName = ${ContentModel.getHaveUserIdName})}" method="post" action="#" th:object="${InsertTalkForm}">
 				<div><textarea cols="50" rows="5" name="talkContent" th:field="*{talkContent}"></textarea></div> <div class="validation_message" th:if="${#fields.hasErrors('talkContent')}" th:errors="*{talkContent}" />
 				<input type="submit" value="送信" class="button" />
 			</form>
 		</div>
+		
 	</th:block>
 </th:block>

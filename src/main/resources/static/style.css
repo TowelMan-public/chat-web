@@ -133,25 +133,41 @@ h1{
 }
 
 .chat_message_text_other{
-	display:inline;
-	max-width: 500px;
+	float:left;
+	max-width: 60%;
+	width: auto;
 	border: 2px solid #ddaabb;
 	text-align: left;
 	background-color: #777777;
 	border-radius: 10px;
+	margin: 10px 10px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 
 .chat_message_text_me{
-	display:inline;
-	max-width: 500px;
+	float:right;
+	max-width: 60%;
+	width: auto;
 	background-color: #107710;
 	border: 2px solid #00bb00;
 	text-align: left;
 	border-radius: 10px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.chat_message_me{
+	margin: 10px 0;
+}
+
+.chat_message_other{
+	margin: 10px 0;
 }
 
 .chat_message_date{
 	font-size: 8px;
+	clear: both;
 }
 
 .chat_list_outer{

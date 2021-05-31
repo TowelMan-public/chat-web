@@ -1,5 +1,7 @@
 package com.example.demo.client.api.entity;
 
+import java.util.Date;
+
 import lombok.Data;
 
 /**
@@ -9,6 +11,7 @@ import lombok.Data;
 public class TalkResponse {
 	private Integer talkIndex;
 	private String userIdName;
+	private String userName;
 	private String content;
 	private String timestampString;
 }

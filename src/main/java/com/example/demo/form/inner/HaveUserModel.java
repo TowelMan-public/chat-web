@@ -12,6 +12,7 @@ public class HaveUserModel {
 	private String userIdName;
 	private String userName;
 	private Integer noticeCount;
+	private Integer myLastTalkIndex;
 	
 	/**
 	 * コンストラクタ
@@ -20,6 +21,7 @@ public class HaveUserModel {
 	public HaveUserModel(HaveUserResponse responce) {
 		this.userIdName = responce.getHaveUserIdName();
 		this.userName = responce.getHaveUserName();
+		this.myLastTalkIndex = responce.getMyLastTalkIndex();
 		this.noticeCount = responce.getTalkLastTalkIndex() - responce.getMyLastTalkIndex();
 	}
 }

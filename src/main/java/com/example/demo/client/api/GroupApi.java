@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.client.api.entity.GroupTalkRoomEntity;
 import com.example.demo.client.api.entity.GroupTalkRoomResponse;
 import com.example.demo.client.api.entity.TalkResponse;
 import com.example.demo.client.exception.NotFoundException;
@@ -33,14 +32,14 @@ public class GroupApi {
 	 * @throws NotJoinGroupException
 	 * @throws NotFoundException
 	 */
-	public GroupTalkRoomEntity getGroup(UserDetailsImp user, Integer talkRoomId) 
+	public GroupTalkRoomResponse getGroup(UserDetailsImp user, Integer talkRoomId) 
 			throws NotJoinGroupException, NotFoundException {
 		final String URL = ROOT_URL + "/get";
 		
 		var dto = new Dto();
 		dto.setTalkRoomId(talkRoomId);
 		
-		return restTemplateAdapter.getForObjectWhenLogined(URL, dto, GroupTalkRoomEntity.class, user);
+		return restTemplateAdapter.getForObjectWhenLogined(URL, dto, GroupTalkRoomResponse.class, user);
 	}
 	
 	/**

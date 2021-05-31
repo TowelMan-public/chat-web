@@ -23,6 +23,6 @@ public class DesireGroupService {
 	 * @return グループに加入してほしい申請リスト
 	 */
 	public List<DesireUserInGroupResponce> getDesireGroupList(UserDetailsImp user) {
-		return desireGroupApi.getDesireUser(user);
+		return desireGroupApi.getDesireUserList(user);
 	}
 }
