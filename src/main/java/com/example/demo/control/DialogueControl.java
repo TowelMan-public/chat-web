@@ -31,6 +31,7 @@ public class DialogueControl {
 	/**
 	 * 友達トークページを表示する
 	 * @param model htmlページにオブジェクトをぶち込むためのもの
+	 * @param haveUserIdName 友達ID名
 	 * @param user ログイン情報
 	 * @return 表示するべきhtmlファイルのパスか、リダイレクト等のURL
 	 */
@@ -52,6 +53,7 @@ public class DialogueControl {
 	 * トークの作成
 	 * @param user ログイン情報
 	 * @param form リクエストパラメータ
+	 * @param haveUserIdName 友達ID名
 	 * @param result バリデーションチェックの結果
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return 表示するべきページのURLか、リダイレクト等のURL

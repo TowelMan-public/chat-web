@@ -29,6 +29,7 @@ public class DesireDialogueControl {
 	/**
 	 * 友達申請トークページを表示する
 	 * @param model htmlページにオブジェクトをぶち込むためのもの
+	 * @param haveUserIdName 友達ID名
 	 * @param user ログイン情報
 	 * @return 表示するべきhtmlファイルのパスか、リダイレクト等のURL
 	 */

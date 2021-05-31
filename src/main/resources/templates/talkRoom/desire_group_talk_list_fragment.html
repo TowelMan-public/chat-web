@@ -1,4 +1,4 @@
-<th:block th:fragment="group_talk_list_fragment(ContentModel)">
+<th:block th:fragment="desire_group_talk_list_fragment">
 	<th:block th:object="${ContentModel}">
 		<div id="talk_list_back"
 			th:if="*{firstIndex} != null"
@@ -21,7 +21,8 @@
 			<div class="chat_message_me"
 				th:if="*{isMyTalk}">
 				
-				<div class="chat_message_text_me" th:text="*{talkContent}">	</div>
+				<div class="chat_message_text_me" th:text="*{talkContent}"
+					th:attr="data-href=@{/web/group/talk/{groupTalkRoomId}/{talkIndex}(groupTalkRoomId = ${ContentModel.getGroupTalkRoomId()}, talkIndex = *{talkIndex})}">	</div>
 				<div class="chat_message_date" th:text="*{dateString}">	</div>
 			</div>
 		</th:block>

@@ -97,7 +97,7 @@
 								<div class="ac-content">
 									<li th:each="list : *{desireGroupList}" th:object="${list}">
 										<div class="see_side_content"
-											th:attr="data-href=@{/web/group/{groupTalkRoomId}(groupTalkRoomId = *{talkRoomId})}">
+											th:attr="data-href=@{/web/desire/group/{groupTalkRoomId}(groupTalkRoomId = *{talkRoomId})}">
 											<div th:text="*{groupName}"></div>
 										</div>
 									</li>

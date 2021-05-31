@@ -42,14 +42,14 @@ public class DesireGroupApi {
 	 * @return グループに加入してほしい申請
 	 * @throws NotFoundException
 	 */
-	public List<DesireUserInGroupResponce> getDesireUser(UserDetailsImp user, Integer talkRoomId)
+	public DesireUserInGroupResponce getDesireUser(UserDetailsImp user, Integer talkRoomId)
 			throws NotFoundException{
 		final String URL = ROOT_URL + "/get";
 		
 		var dto = new Dto();
 		dto.setTalkRoomId(talkRoomId);
 		
-		return restTemplateAdapter.getForListWhenLogined(URL, dto, DesireUserInGroupResponce[].class, user);
+		return restTemplateAdapter.getForObjectWhenLogined(URL, dto, DesireUserInGroupResponce.class, user);
 	}
 	
 	/**
