@@ -70,7 +70,7 @@ public class SeeSideListModel {
 		allNoticeCountInGroupList = 0;
 		
 		for(GroupListModel modelEntity : this.groupList) {
-			allNoticeCountInHaveUserList += modelEntity.getNoticeCount();
+			allNoticeCountInGroupList += modelEntity.getNoticeCount();
 			
 			if(modelEntity.getNoticeCount() == 0)
 				break;
