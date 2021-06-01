@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.springframework.ui.Model;
 
+import com.example.demo.form.SeeSideListModel;
 import com.example.demo.form.insert.CreateGroupForm;
 import com.example.demo.form.insert.InsertTalkForm;
 import com.example.demo.form.insert.InsertUserForm;
@@ -122,6 +123,12 @@ public class ModelSetter {
 	 */
 	public static final WebSeeContentType FRAGMENT_DESIRE_GROUP = new WebSeeContentType (null,
 			"talkRoom/desire_group_talk_list_fragment::desire_group_talk_list_fragment");
+	
+	/**
+	 * サイドの部分のフラグメント
+	 */
+	public static final WebSeeContentType FRAGMENT_SEE_SIDE = new WebSeeContentType (null,
+			"see_side_fragment::see_side_fragment");
 	
 	/**
 	 * コンストラクタ<br>
@@ -263,6 +270,18 @@ public class ModelSetter {
 	 */
 	public ModelSetter setSignupForm(SignupForm object){
 		setOther("SignupForm", object);
+		return this;
+	}
+	
+	/**
+	 * Modelクラウスにオブジェクトをセットする。<br>
+	 * キー名：SeeSideListModel<br>
+	 * 既に同じキー名にセットされている場合はセットしない。
+	 * @param object セットしたいオブジェクト
+	 * @return 自分
+	 */
+	public ModelSetter setSeeSideListModel(SeeSideListModel object){
+		setOther("SeeSideListModel", object);
 		return this;
 	}
 	

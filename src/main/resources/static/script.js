@@ -1,3 +1,4 @@
+//ajaxの処理をやって成功したら最後に必ず呼ぶ
 function set_date_href_script(){
 	jQuery( function($) {
 	    $('tbody td[data-href]').addClass('clickable').click( function() {
@@ -78,4 +79,29 @@ function load_talk_list_back() {
 			// エラー処理 何もしない
 		}
 	});
+}
+
+function load_see_side(){
+	var getUrl = $("#see_side").attr("ajax-href");
+	console.log(getUrl);
+	
+	$.ajax({
+		type : "GET",
+		url : getUrl,
+		dataType : "html",
+		success : function(data, status, xhr) {
+			var  element = document.querySelector('#see_side');
+			element.insertAdjacentHTML('afterbegin', data);
+			
+			set_date_href_script();
+		},
+		error : function(XMLHttpRequest, status, errorThrown) {
+			// エラー処理 何もしない
+		}
+	});
+}
+
+//最初に実行するもの
+function init_example_page(){
+	load_see_side();
 }
