@@ -3,12 +3,12 @@
 		<h2>友達トークの詳細</h2>
 		
 		<div class="chat_send_message_box">
-			<form th:action="@{/web/dialogue/talk/update/{haveUserIdName}/{talkIndex}(haveUserIdName=*{haveUserIdName}, talkIndex=*{talkIndex})}" method="post" th:object="${UpdateTalkForm}"> 
+			<form th:action="@{/web/dialogue/talk/update/{haveUserIdName}/{talkIndex}(haveUserIdName=${ContentModel.getHaveUserIdName}, talkIndex=${ContentModel.getTalkIndex})}" method="post" th:object="${UpdateTalkForm}"> 
 				<div><textarea cols="50" rows="5" name="talkContent" th:field="*{talkContent}"></textarea></div> <div class="validation_message" th:if="${#fields.hasErrors('talkContent')}" th:errors="*{talkContent}" />
 				<input type="submit" class="button" value="変更" />
 				<input type="submit" class="delete_button" value="削除" form="delete_form"/>
 			</form>
 		</div>
-		<form th:action="@{/web/dialogue/talk/delete/{haveUserIdName}/{talkIndex}(haveUserIdName=*{haveUserIdName}, talkIndex=*{talkIndex})}" method="post" class="button_form" id="delete_form"></form>
+		<form th:action="@{/web/dialogue/talk/delete/{haveUserIdName}/{talkIndex}(haveUserIdName=${ContentModel.getHaveUserIdName}, talkIndex=${ContentModel.getTalkIndex})}" method="post" class="button_form" id="delete_form"></form>
 	</th:block>
 </th:block>

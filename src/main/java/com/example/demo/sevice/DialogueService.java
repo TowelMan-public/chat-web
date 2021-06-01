@@ -16,6 +16,7 @@ import com.example.demo.client.exception.NotFoundException;
 import com.example.demo.form.DialogueModel;
 import com.example.demo.form.inner.HaveUserModel;
 import com.example.demo.form.inner.TalkModel;
+import com.example.demo.form.update.UpdateTalkForm;
 import com.example.demo.security.UserDetailsImp;
 import com.example.demo.utility.CommonUtility;
 
@@ -166,5 +167,40 @@ public class DialogueService {
 		dialogueModel.setFirstIndex(startIndex);
 		
 		return dialogueModel;
+	}
+
+	/**
+	 * 友達トークの取得
+	 * @param user ログイン情報
+	 * @param haveUserIdName 友達のユーザーID名
+	 * @param talkIndex 友達トークのインデックス
+	 * @return 友達トーク
+	 */
+	public UpdateTalkForm getTalk(UserDetailsImp user, String haveUserIdName, Integer talkIndex) {
+		var talkResponse = dialogueTalkApi.getTalk(user, haveUserIdName, talkIndex);
+		
+		return new UpdateTalkForm(
+				talkResponse.getContent());
+	}
+
+	/**
+	 * 友達トークの変更
+	 * @param user ログイン情報
+	 * @param haveUserIdName 友達のユーザーID名
+	 * @param talkIndex 友達トークのインデックス
+	 * @param talkContent トークの内容
+	 */
+	public void updateTalk(UserDetailsImp user, String haveUserIdName, Integer talkIndex, String talkContent) {
+		dialogueTalkApi.updateTalk(user, haveUserIdName, talkIndex, talkContent);
+	}
+
+	/**
+	 * 友達トークの削除
+	 * @param user ログイン情報
+	 * @param haveUserIdName 友達のユーザーID名
+	 * @param talkIndex 友達トークのインデックス
+	 */
+	public void deleteTalk(UserDetailsImp user, String haveUserIdName, Integer talkIndex) {
+		dialogueTalkApi.deleteTalk(user, haveUserIdName, talkIndex);
 	}
 }

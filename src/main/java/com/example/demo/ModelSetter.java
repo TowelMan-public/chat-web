@@ -9,6 +9,7 @@ import com.example.demo.form.insert.SignupForm;
 import com.example.demo.form.update.UpdateIdNameForm;
 import com.example.demo.form.update.UpdateNameForm;
 import com.example.demo.form.update.UpdatePasswordForm;
+import com.example.demo.form.update.UpdateTalkForm;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -188,7 +189,7 @@ public class ModelSetter {
 	 * @param object セットしたいオブジェクト
 	 * @return 自分
 	 */
-	public ModelSetter setUpdateTalkForm(Object object){
+	public ModelSetter setUpdateTalkForm(UpdateTalkForm object){
 		setOther("UpdateTalkForm", object);
 		return this;
 	}
