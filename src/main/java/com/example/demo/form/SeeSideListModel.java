@@ -78,7 +78,8 @@ public class SeeSideListModel {
 	}
 	
 	private class HaveUserModelComparator implements Comparator<HaveUserModel> {
-	    public int compare(HaveUserModel c1, HaveUserModel c2) {
+	    @Override
+		public int compare(HaveUserModel c1, HaveUserModel c2) {
 	        if(c1.getNoticeCount() > c2.getNoticeCount()) {
 	            return -1;
 	        } else if(c1.getNoticeCount() < c2.getNoticeCount()) {
@@ -90,7 +91,8 @@ public class SeeSideListModel {
 	}
 	
 	private class GroupListModelComparator implements Comparator<GroupListModel> {
-	    public int compare(GroupListModel c1, GroupListModel c2) {
+	    @Override
+		public int compare(GroupListModel c1, GroupListModel c2) {
 	        if(c1.getNoticeCount() > c2.getNoticeCount()) {
 	            return -1;
 	        } else if(c1.getNoticeCount() < c2.getNoticeCount()) {
