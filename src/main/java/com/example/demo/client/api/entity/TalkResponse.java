@@ -1,7 +1,5 @@
 package com.example.demo.client.api.entity;
 
-import java.util.Date;
-
 import lombok.Data;
 
 /**

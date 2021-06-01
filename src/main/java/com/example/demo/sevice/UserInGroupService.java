@@ -10,7 +10,6 @@ import com.example.demo.client.api.entity.UserInGroupResponse;
 import com.example.demo.client.exception.AlreadyInsertedGroupDesireException;
 import com.example.demo.client.exception.AlreadyInsertedGroupException;
 import com.example.demo.client.exception.NotFoundException;
-import com.example.demo.client.exception.NotJoinGroupException;
 import com.example.demo.security.UserDetailsImp;
 
 /**
