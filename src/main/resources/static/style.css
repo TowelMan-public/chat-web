@@ -194,6 +194,11 @@ h1{
 	font-size: 18px;
 }
 
+.talk_list_load{
+	background-color: #555500;
+	font-size: 20px;
+}
+
 /*//////////////////////
 //
 // 共通・アコーディオンのクリック
