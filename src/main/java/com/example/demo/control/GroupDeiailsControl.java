@@ -74,19 +74,21 @@ public class GroupDeiailsControl {
 	@PostMapping("update/name/{groupTalkRoomId}")
 	public String updateGroupName(@AuthenticationPrincipal UserDetailsImp user,
 			@PathVariable("groupTalkRoomId") Integer groupTalkRoomId, @Validated UpdateNameForm form, BindingResult result, RedirectAttributes redirect){
+		final String REDIRECT_GROUP_DETAILS_URL = UrlConfig.REDIRECT_ROOT_URL + 
+				"/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
 		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateName", result);
 			redirect.addFlashAttribute("UpdateName", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+			return REDIRECT_GROUP_DETAILS_URL;
 		}
 		
 		//処理
 		groupService.updateGroupName(user, groupTalkRoomId, form.getName());
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+		return REDIRECT_GROUP_DETAILS_URL;
 	}
 	
 	/**
@@ -101,7 +103,7 @@ public class GroupDeiailsControl {
 		groupService.deleteGroup(user, groupTalkRoomId);
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 	
 	/**
@@ -117,11 +119,14 @@ public class GroupDeiailsControl {
 	public String insertUserInGroup(@AuthenticationPrincipal UserDetailsImp user,
 			@PathVariable("groupTalkRoomId") Integer groupTalkRoomId, @Validated InsertUserForm form, BindingResult result, RedirectAttributes redirect){
 		
+		final String REDIRECT_GROUP_DETAILS_URL = UrlConfig.REDIRECT_ROOT_URL + 
+				"/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 			redirect.addFlashAttribute("InsertUser", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+			return REDIRECT_GROUP_DETAILS_URL;
 		}
 		
 		//処理
@@ -133,14 +138,14 @@ public class GroupDeiailsControl {
 			result.addError(error);
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 			redirect.addFlashAttribute("InsertUser", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+			return REDIRECT_GROUP_DETAILS_URL;
 		}
 		catch(AlreadyInsertedGroupDesireException e) {
 			var error = new FieldError(result.getObjectName(), "userIdName", "あなたが指定したユーザーは今現在勧誘中です。");
 			result.addError(error);
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 			redirect.addFlashAttribute("InsertUser", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+			return REDIRECT_GROUP_DETAILS_URL;
 		}
 		catch(NotFoundException e) {
 			if(e.isErrorFieldUserIdName()) {
@@ -148,14 +153,14 @@ public class GroupDeiailsControl {
 				result.addError(error);
 				redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 				redirect.addFlashAttribute("InsertUser", form);
-				return "redirect:" + UrlConfig.ROOT_URL + "/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+				return REDIRECT_GROUP_DETAILS_URL;
 			}else {
 				throw e;
 			}
 		}
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/group/details/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+		return REDIRECT_GROUP_DETAILS_URL;
 	}
 	
 	/**
@@ -172,6 +177,6 @@ public class GroupDeiailsControl {
 		userInGroupService.deleteUserInGroup(user, groupTalkRoomId, userIdName);
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 }

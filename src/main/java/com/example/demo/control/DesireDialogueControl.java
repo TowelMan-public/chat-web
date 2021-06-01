@@ -53,7 +53,7 @@ public class DesireDialogueControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/desire/dialogue/{haveUserIdName}/next")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/desire/dialogue/{haveUserIdName}/next")
 	public String loadNextDesireDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("haveUserIdName") String haveUserIdName,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		
@@ -80,7 +80,7 @@ public class DesireDialogueControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/desire/dialogue/{haveUserIdName}/back")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/desire/dialogue/{haveUserIdName}/back")
 	public String loadBackDesireDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("haveUserIdName") String haveUserIdName,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		
@@ -108,7 +108,7 @@ public class DesireDialogueControl {
 	public String joinDesireHaveUser(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("haveUserIdName") String haveUserIdName) {
 		desireDialogueService.joinDesireHaveUser(user, haveUserIdName);
 		
-		return "redirect:" + UrlConfig.ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
+		return UrlConfig.REDIRECT_ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
 	}
 	
 	/**
@@ -121,6 +121,6 @@ public class DesireDialogueControl {
 	public String deleteDesireHaveUser(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("haveUserIdName") String haveUserIdName) {
 		desireDialogueService.deleteDesireHaveUser(user, haveUserIdName);
 		
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 }

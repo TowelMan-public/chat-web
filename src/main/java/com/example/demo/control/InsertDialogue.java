@@ -60,7 +60,7 @@ public class InsertDialogue {
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 			redirect.addFlashAttribute("InsertUser", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/insert/dialogue";
+			return UrlConfig.REDIRECT_ROOT_URL + "/insert/dialogue";
 		}
 		
 		//処理
@@ -72,7 +72,7 @@ public class InsertDialogue {
 			result.addError(error);
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 			redirect.addFlashAttribute("InsertUser", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/insert/dialogue";
+			return UrlConfig.REDIRECT_ROOT_URL + "/insert/dialogue";
 		}
 		catch(NotFoundException e) {
 			if(e.isErrorFieldUserIdName()) {
@@ -80,13 +80,13 @@ public class InsertDialogue {
 				result.addError(error);
 				redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 				redirect.addFlashAttribute("InsertUser", form);
-				return "redirect:" + UrlConfig.ROOT_URL + "/insert/dialogue";
+				return UrlConfig.REDIRECT_ROOT_URL + "/insert/dialogue";
 			}else {
 				throw e;
 			}
 		}
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 }

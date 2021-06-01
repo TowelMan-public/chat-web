@@ -66,11 +66,13 @@ public class UserControl {
 	@PostMapping("update/id")
 	public String updateUserIdName(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdateIdNameForm form, BindingResult result, RedirectAttributes redirect) {
+		final String REDIRECT_USER_PAGE = UrlConfig.REDIRECT_ROOT_URL + "/user";
+		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateIdName", result);
 			redirect.addFlashAttribute("UpdateIdName", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/user";
+			return REDIRECT_USER_PAGE;
 		}
 		
 		//処理
@@ -82,11 +84,11 @@ public class UserControl {
 			result.addError(error);
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateIdName", result);
 			redirect.addFlashAttribute("UpdateIdName", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/user";
+			return REDIRECT_USER_PAGE;
 		}
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/user";
+		return REDIRECT_USER_PAGE;
 	}
 	
 	/**
@@ -100,18 +102,20 @@ public class UserControl {
 	@PostMapping("update/name")
 	public String updateUserName(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdateNameForm form, BindingResult result, RedirectAttributes redirect) {
+		final String REDIRECT_USER_PAGE = UrlConfig.REDIRECT_ROOT_URL + "/user";
+		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateName", result);
 			redirect.addFlashAttribute("UpdateName", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/user";
+			return REDIRECT_USER_PAGE;
 		}
 		
 		//処理
 		userService.updateUserName(user, form.getName());
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/user";
+		return REDIRECT_USER_PAGE;
 	}
 	
 	/**
@@ -125,17 +129,20 @@ public class UserControl {
 	@PostMapping("update/password")
 	public String updatePassword(@AuthenticationPrincipal UserDetailsImp user, 
 			@Validated UpdatePasswordForm form, BindingResult result, RedirectAttributes redirect) {
+		
+		final String REDIRECT_USER_PAGE = UrlConfig.REDIRECT_ROOT_URL + "/user";
+		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdatePassword", result);
 			redirect.addFlashAttribute("UpdatePassword", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/user";
+			return REDIRECT_USER_PAGE;
 		}
 		
 		//処理
 		userService.updatePassword(user, form.getPassword());
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/user";
+		return REDIRECT_USER_PAGE;
 	}
 }

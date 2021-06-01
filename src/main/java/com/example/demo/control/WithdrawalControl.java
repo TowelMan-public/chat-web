@@ -44,6 +44,6 @@ public class WithdrawalControl {
 	@PostMapping
 	public String updateUserIdName(@AuthenticationPrincipal UserDetailsImp user) {
 		userService.deleteUser(user);
-		return "redirect:" + UrlConfig.ROOT_URL + "/logout";
+		return UrlConfig.REDIRECT_ROOT_URL + "/logout";
 	}
 }

@@ -58,6 +58,6 @@ public class DialogueUserControl {
 		dialogueService.deleteHaveUser(user, haveUserIdName);
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 }

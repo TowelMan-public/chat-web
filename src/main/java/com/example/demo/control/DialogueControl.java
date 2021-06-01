@@ -65,14 +65,14 @@ public class DialogueControl {
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.CreateGInsertTalkFormroup", result);
 			redirect.addFlashAttribute("InsertTalkForm", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
+			return UrlConfig.REDIRECT_ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
 		}
 		
 		//処理
 		dialogueService.insertTalk(user, haveUserIdName, form.getTalkContent());
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
+		return UrlConfig.REDIRECT_ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
 	}
 	
 	/**
@@ -84,7 +84,7 @@ public class DialogueControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/dialogue/{haveUserIdName}/next")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/dialogue/{haveUserIdName}/next")
 	public String loadNextDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("haveUserIdName") String haveUserIdName,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		
@@ -111,7 +111,7 @@ public class DialogueControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/dialogue/{haveUserIdName}/back")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/dialogue/{haveUserIdName}/back")
 	public String loadBackDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("haveUserIdName") String haveUserIdName,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		

@@ -54,7 +54,7 @@ public class SignupControl {
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.SignupForm", result);
 			redirect.addFlashAttribute("SignupForm", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/signup";
+			return UrlConfig.REDIRECT_ROOT_URL + "/signup";
 		}
 		
 		//処理
@@ -66,10 +66,10 @@ public class SignupControl {
 			result.addError(error);
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.SignupForm", result);
 			redirect.addFlashAttribute("SignupForm", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/signup";
+			return UrlConfig.REDIRECT_ROOT_URL + "/signup";
 		}
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 }

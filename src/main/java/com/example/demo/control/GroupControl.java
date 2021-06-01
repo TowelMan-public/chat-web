@@ -69,7 +69,7 @@ public class GroupControl {
 		
 		groupService.insertTalk(user, groupTalkRoomId, form.getTalkContent());
 		
-		return "redirect:" + UrlConfig.ROOT_URL + "/group/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+		return UrlConfig.REDIRECT_ROOT_URL + "/group/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class GroupControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/group/{groupTalkRoomId}/next")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/group/{groupTalkRoomId}/next")
 	public String loadNextDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("groupTalkRoomId") Integer groupTalkRoomId,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		//入力ﾁｪｯｸ
@@ -107,7 +107,7 @@ public class GroupControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/group/{groupTalkRoomId}/back")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/group/{groupTalkRoomId}/back")
 	public String loadBackDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("groupTalkRoomId") Integer groupTalkRoomId,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		//入力ﾁｪｯｸ

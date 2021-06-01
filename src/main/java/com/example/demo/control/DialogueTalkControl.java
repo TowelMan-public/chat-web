@@ -66,22 +66,23 @@ public class DialogueTalkControl {
 	public String updateDialogueTalk(@AuthenticationPrincipal UserDetailsImp user, 
 			@PathVariable("haveUserIdName") String haveUserIdName, @PathVariable("talkIndex") Integer talkIndex,
 			@Validated UpdateTalkForm form, BindingResult result, RedirectAttributes redirect) {
+		final String REDIRECT_DIALOGUE_TALK_URL = UrlConfig.REDIRECT_ROOT_URL +
+				"/dialogue/talk/{haveUserIdName}/{talkIndex}"
+					.replace("{haveUserIdName}", haveUserIdName)
+					.replace("{talkIndex}", talkIndex.toString());
+		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateIdName", result);
 			redirect.addFlashAttribute("UpdateIdName", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/dialogue/talk/{haveUserIdName}/{talkIndex}"
-					.replace("{haveUserIdName}", haveUserIdName)
-					.replace("{talkIndex}", talkIndex.toString());
+			return REDIRECT_DIALOGUE_TALK_URL;
 		}
 		
 		//処理
 		dialogueService.updateTalk(user, haveUserIdName, talkIndex, form.getTalkContent());
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/dialogue/talk/{haveUserIdName}/{talkIndex}"
-				.replace("{haveUserIdName}", haveUserIdName)
-				.replace("{talkIndex}", talkIndex.toString());
+		return REDIRECT_DIALOGUE_TALK_URL;
 	}
 	
 	/**
@@ -93,11 +94,11 @@ public class DialogueTalkControl {
 	 */
 	@PostMapping("delete/{haveUserIdName}/{talkIndex}")
 	public String deleteDialogueTalk(@AuthenticationPrincipal UserDetailsImp user, 
-			@PathVariable("haveUserIdName") String haveUserIdName, @PathVariable("talkIndex") Integer talkIndex) {
+			@PathVariable("haveUserIdName") String haveUserIdName, @PathVariable("talkIndex") Integer talkIndex) {		
 		//処理
 		dialogueService.deleteTalk(user, haveUserIdName, talkIndex);
 		
 		//リダイレクト		
-		return "redirect:" + UrlConfig.ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
+		return UrlConfig.REDIRECT_ROOT_URL + "/dialogue/{haveUserIdName}".replace("{haveUserIdName}", haveUserIdName);
 	}
 }

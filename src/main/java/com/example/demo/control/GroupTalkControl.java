@@ -65,22 +65,23 @@ public class GroupTalkControl {
 	public String updateGroupTalk(@AuthenticationPrincipal UserDetailsImp user, 
 			@PathVariable("groupTalkRoomId") Integer groupTalkRoomId, @PathVariable("talkIndex") Integer talkIndex,
 			@Validated UpdateTalkForm form, BindingResult result, RedirectAttributes redirect) {
+		final String REDIRECT_DIALOGUE_TALK_PAGE = UrlConfig.REDIRECT_ROOT_URL + 
+				"/dialogue/talk/{haveUserIdName}/{talkIndex}"
+					.replace("{groupTalkRoomId}", groupTalkRoomId.toString())
+					.replace("{talkIndex}", talkIndex.toString());
+		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateIdName", result);
 			redirect.addFlashAttribute("UpdateIdName", form);
-			return "redirect:" + UrlConfig.ROOT_URL + "/dialogue/talk/{haveUserIdName}/{talkIndex}"
-					.replace("{groupTalkRoomId}", groupTalkRoomId.toString())
-					.replace("{talkIndex}", talkIndex.toString());
+			return REDIRECT_DIALOGUE_TALK_PAGE;
 		}
 		
 		//処理
 		groupService.updateTalk(user, groupTalkRoomId, talkIndex, form.getTalkContent());
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/group/talk/{groupTalkRoomId}/{talkIndex}"
-				.replace("{groupTalkRoomId}", groupTalkRoomId.toString())
-				.replace("{talkIndex}", talkIndex.toString());
+		return REDIRECT_DIALOGUE_TALK_PAGE;
 	}
 	
 	/**
@@ -97,6 +98,6 @@ public class GroupTalkControl {
 		groupService.deleteTalk(user, groupTalkRoomId, talkIndex);
 		
 		//リダイレクト		
-		return "redirect:" + UrlConfig.ROOT_URL + "/group/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+		return UrlConfig.REDIRECT_ROOT_URL + "/group/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
 	}
 }

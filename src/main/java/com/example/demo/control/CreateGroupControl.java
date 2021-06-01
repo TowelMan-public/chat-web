@@ -64,6 +64,6 @@ public class CreateGroupControl {
 		groupService.createGroup(user, form.getGroupName());
 		
 		//リダイレクト
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 }

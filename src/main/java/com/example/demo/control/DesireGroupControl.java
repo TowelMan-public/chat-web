@@ -52,7 +52,7 @@ public class DesireGroupControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/desire/group/{groupTalkRoomId}/next")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/desire/group/{groupTalkRoomId}/next")
 	public String loadNextDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("groupTalkRoomId") Integer groupTalkRoomId,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		//入力ﾁｪｯｸ
@@ -78,7 +78,7 @@ public class DesireGroupControl {
 	 * @param redirect リダイレクト時に反映させるModel
 	 * @return HTMLのフラグメントのURL
 	 */
-	@GetMapping("/load/desire/group/{groupTalkRoomId}/back")
+	@GetMapping(UrlConfig.AJAX_ROOT_URL + "/desire/group/{groupTalkRoomId}/back")
 	public String loadBackDialogueTalkList(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("groupTalkRoomId") Integer groupTalkRoomId,
 			@Validated LoadTalkForm form, BindingResult result, Model model) {
 		//入力ﾁｪｯｸ
@@ -105,7 +105,7 @@ public class DesireGroupControl {
 	public String joinDesireGroup(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("groupTalkRoomId") Integer groupTalkRoomId) {
 		desireGroupService.joinDesireGroup(user, groupTalkRoomId);
 		
-		return "redirect:" + UrlConfig.ROOT_URL + "/group/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
+		return UrlConfig.REDIRECT_ROOT_URL + "/group/{groupTalkRoomId}".replace("{groupTalkRoomId}", groupTalkRoomId.toString());
 	}
 	
 	/**
@@ -118,6 +118,6 @@ public class DesireGroupControl {
 	public String deleteDesireGroup(@AuthenticationPrincipal UserDetailsImp user, @PathVariable("groupTalkRoomId") Integer groupTalkRoomId) {
 		desireGroupService.deleteDesireGroup(user, groupTalkRoomId);
 		
-		return "redirect:" + UrlConfig.ROOT_URL + "/home";
+		return UrlConfig.REDIRECT_ROOT_URL + "/home";
 	}
 }
