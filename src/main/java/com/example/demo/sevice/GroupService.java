@@ -13,6 +13,7 @@ import com.example.demo.client.api.entity.TalkResponse;
 import com.example.demo.form.GroupModel;
 import com.example.demo.form.inner.GroupListModel;
 import com.example.demo.form.inner.TalkModel;
+import com.example.demo.form.update.UpdateTalkForm;
 import com.example.demo.security.UserDetailsImp;
 import com.example.demo.utility.CommonUtility;
 
@@ -177,6 +178,40 @@ public class GroupService {
 						startIndex + maxSize - 1, groupRalkRoomResponce.getGroupLastTalkIndex()));
 		
 		return groupModel;
+	}
+
+	/**
+	 * 友達トークの取得
+	 * @param user ログイン情報
+	 * @param groupTalkRoomId グループトークルームID
+	 * @param talkIndex グループトークインデックス
+	 * @return 友達トーク
+	 */
+	public UpdateTalkForm getTalk(UserDetailsImp user, Integer groupTalkRoomId, Integer talkIndex) {
+		var talkResponse = groupTalkApi.getTalk(user, groupTalkRoomId, talkIndex);
+		
+		return new UpdateTalkForm(talkResponse.getContent());
+	}
+
+	/**
+	 * 友達トークの更新
+	 * @param user ログイン情報
+	 * @param groupTalkRoomId グループトークルームID
+	 * @param talkIndex グループトークインデックス
+	 * @param talkContent グループトークの内容
+	 */
+	public void updateTalk(UserDetailsImp user, Integer groupTalkRoomId, Integer talkIndex, String talkContent) {
+		groupTalkApi.updateTalk(user, groupTalkRoomId, talkIndex, talkContent);
+	}
+
+	/**
+	 * 友達トークの削除
+	 * @param user ログイン情報
+	 * @param groupTalkRoomId グループトークルームID
+	 * @param talkIndex グループトークインデックス
+	 */
+	public void deleteTalk(UserDetailsImp user, Integer groupTalkRoomId, Integer talkIndex) {
+		groupTalkApi.deleteTalk(user, groupTalkRoomId, talkIndex);
 	}
 	
 }
