@@ -293,7 +293,7 @@ public class ModelSetter {
 	@Getter
 	@AllArgsConstructor
 	private static class WebSeeContentType{
-		public static final String EXAMPLE_URL = "/example";
+		public static final String EXAMPLE_URL = "example";
 		private String webSeeContentTypeName;
 		private String pageUrl;
 	}
