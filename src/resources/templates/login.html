@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>チャット♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	
+	<body>
+		<h1>チャット♪</h1>
+		<h2>ログイン</h2>
+		<div th:if="${param.error}" class="validation_message">ログインに失敗しました。もう一度ユーザーIDとパスワードをお確かめください。</div>
+		<form th:action="@{/web/login}" method="post"> 
+			<div class="input_label">ユーザーID：<input type="text" name="userIdName" /></div><br>
+			<div class="input_label">パスワード：<input type="password" name="password"/></div><br>
+			<p><input type="submit" value="ログイン" class="button"/></p>
+		</form>
+		<a th:href="@{/web/signup}">ユーザーを作る</a>
+	</body>
+</html>

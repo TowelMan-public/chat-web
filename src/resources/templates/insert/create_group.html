@@ -1,0 +1,11 @@
+<th:block th:fragment="create_group(CreateGroup)">
+	<th:block>
+		<h2>グループ作成</h2>
+		
+		<form th:action="@{/web/create/group}" method="post" th:object="${CreateGroup}"> 
+			<div>グループ名：<input type="text" name="groupName" th:field="*{groupName}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('groupName')}" th:errors="*{groupName}" /><br>
+			<input type="submit" class="button" value="登録" />
+		</form>
+		
+	</th:block>
+</th:block>

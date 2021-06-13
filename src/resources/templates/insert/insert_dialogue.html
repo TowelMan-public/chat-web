@@ -1,0 +1,11 @@
+<th:block th:fragment="insert_dialogue(InsertUser)">
+	<th:block>
+		<h2>友達追加</h2>
+		
+		<form th:action="@{/web/insert/dialogue}" method="post" th:object="${InsertUser}"> 
+			<div>ユーザーID：<input type="text" name="userIdName" th:field="*{userIdName}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('userIdName')}" th:errors="*{userIdName}" /><br>
+			<input type="submit" class="button" value="登録" />
+		</form>
+		
+	</th:block>
+</th:block>

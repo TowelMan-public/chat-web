@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>チャット♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script th:src="@{/script.js}"></script>
+	</head>
+	
+	<body>
+		<h1>チャット♪</h1>
+		<div class="see">
+			<div id="see_side" class="see_side"
+				th:attr="ajax-href=@{/load/see/side}">
+			</div>
+			<div class="see_contents">
+				<th:brock
+					th:if="${WebSeeContentType}=='dialogue'"
+				 	th:insert="talkRoom/dialogue::dialogue(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='group'"
+				 	th:insert="talkRoom/group::group(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='desire_dialogue'"
+				 	th:insert="talkRoom/desire_dialogue::desire_dialogue(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='desire_group'"
+				 	th:insert="talkRoom/desire_group::desire_group(ContentModel=${ContentModel}, InsertTalkForm=${InsertTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='dialogue_user'"
+				 	th:insert="dialogue/dialogue_user::dialogue_user(ContentModel=${ContentModel})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='dialogue_talk_get'"
+				 	th:insert="dialogue/dialogue_talk_get::dialogue_talk_get(ContentModel=${ContentModel}, UpdateTalkForm=${UpdateTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='group_details'"
+				 	th:insert="group/group_details::group_details(ContentModel=${ContentModel}, UpdateName=${UpdateName}, InsertUser=${InsertUser})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='group_talk_get'"
+				 	th:insert="group/group_talk_get::group_talk_get(ContentModel=${ContentModel}, UpdateTalkForm=${UpdateTalkForm})"></th:brock>
+				 <th:brock
+					th:if="${WebSeeContentType}=='insert_dialogue'"
+				 	th:insert="insert/insert_dialogue::insert_dialogue(InsertUser=${InsertUser})"></th:brock>
+				 
+				 <th:brock
+					th:if="${WebSeeContentType}=='create_group'"
+				 	th:insert="insert/create_group::create_group(CreateGroup=${CreateGroup})"></th:brock>
+				 
+				 <th:brock
+					th:if="${WebSeeContentType}=='user'"
+				 	th:insert="user::user(UpdateName=${UpdateName}, UpdateIdName=${UpdateIdName}, UpdatePassword=${UpdatePassword})"></th:brock>
+			</div>
+			<div class="right_side_menu_outer">
+				<div class="right_side_menu_title">メニュー</div>
+				<div class="right_side_menu_inner" th:attr="data-href=@{/web/insert/dialogue}">友達追加</div>
+				<div class="right_side_menu_inner" th:attr="data-href=@{/web/create/group}">グループ作成</div>
+				<div class="right_side_menu_inner" th:attr="data-href=@{/web/user}">設定</div>
+				<div class="right_side_menu_inner" th:attr="data-href=@{/web/logout}">ログアウト</div>
+			</div>
+		</div>
+	<script>init_example_page();</script>
+	</body>
+</html>

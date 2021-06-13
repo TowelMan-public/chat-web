@@ -1,0 +1,13 @@
+<th:block th:fragment="dialogue_user(ContentModel)">
+	<th:block th:object="${ContentModel}">
+		<h2>友達の詳細情報</h2>
+		
+		<div th:text="'ユーザーID:' + *{userIdName}"></div>
+		<div th:text="'ニックネーム:' + *{userName}"></div>
+		
+		<br>
+		<form th:action="@{/web/dialogue/exit/{haveUserIdName}(haveUserIdName=*{userIdName})}" method="post" class="button_form"> 
+			<input type="submit" class="delete_button" value="この友達と関係を終わる" />
+		</form>
+	</th:block>
+</th:block>

@@ -1,0 +1,40 @@
+<th:block th:fragment="dialogue_talk_list_fragment">
+	<th:block th:object="${ContentModel}">
+		<div id="talk_list_back"
+			th:if="*{firstIndex} != null"
+			onclick="load_talk_list_back()"
+			th:attr="
+				ajax-href=@{/load/dialogue/{haveUserIdName}/back(haveUserIdName=*{haveUserIdName})} ,
+				ajax-index=*{firstIndex} - 1">
+				
+			<div class="talk_list_back_load talk_list_load">&#8679;</div>
+		</div>
+		<th:block th:each="list : *{talkList}" th:object="${list}">
+			<div class="chat_message_other"
+				th:if="! *{isMyTalk}">
+				
+				<div class="chat_message_other_sender" th:text="*{senderUserName}">	</div>
+				<div class="chat_message_text_other" th:text="*{talkContent}">	</div>
+				<div class="chat_message_date" th:text="*{dateString}">	</div>
+			</div>
+			
+			<div class="chat_message_me"
+				th:if="*{isMyTalk}">
+				
+				<div class="chat_message_text_me" th:text="*{talkContent}"
+					th:attr="data-href=@{/web/dialogue/talk/{haveUserIdName}/{talkIndex}(haveUserIdName = ${ContentModel.getHaveUserIdName()}, talkIndex = *{talkIndex})}">	</div>
+				<div class="chat_message_date" th:text="*{dateString}">	</div>
+			</div>
+		</th:block>
+		<div id="talk_list_next"
+			th:if="*{finalIndex} != null"
+			onclick="load_talk_list_next()"
+			th:attr="
+				ajax-href=@{/load/dialogue/{haveUserIdName}/next(haveUserIdName=*{haveUserIdName})} ,
+				ajax-index=*{finalIndex} + 1">
+				
+			<div class="talk_list_next_load talk_list_load">&#8681;</div>
+		</div>
+		<script th:src="@{/script.js}"></script>
+	</th:block>
+</th:block>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>チャット♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	
+	<body>
+		<h1>チャット♪</h1>
+		<h2>ユーザーの新規作成</h2>
+		<form th:action="@{/web/signup}" method="post" action="#" th:object="${SignupForm}">
+			<div>ニックネーム：<input type="text" name="userName" th:field="*{userName}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" /><br>
+			<div>ユーザーID：<input type="text" name="userIdName" th:field="*{userIdName}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('userIdName')}" th:errors="*{userIdName}" /><br>
+			<div class="validation_message" th:if="${#fields.hasErrors('notMatchesPassword')}" th:field="*{notMatchesPassword}" th:errors="*{notMatchesPassword}"></div>
+			<div>パスワード：<input type="password" name="password" th:field="*{password}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}" /><br>
+			<div>パスワード（もう一度）：<input type="password" name="oneMorePassword" th:field="*{oneMorePassword}"/></div> <div class="validation_message" th:if="${#fields.hasErrors('oneMorePassword')}" th:errors="*{oneMorePassword}" /><br>
+			<input type="submit" value="ユーザー登録" class="button" />
+			<input type="submit" class="button" value="戻る" form="back_button"/>
+		</form>
+		
+		<form th:action="@{/web/login}" method="get" class="button_form" id="back_button"></form>
+	</body>
+</html>

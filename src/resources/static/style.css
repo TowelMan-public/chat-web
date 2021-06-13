@@ -1,0 +1,354 @@
+body{
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 auto;
+	max-width: 100000px;
+	text-align: center;
+	align-items: center;
+	background-color: #303030;
+	color: #ffffff;
+}
+
+h1{
+	font-size: 3em;
+}
+
+/*//////////////////////
+//
+// 見せるところの大枠
+//
+///////////////////////*/
+
+.see {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*//////////////////////
+//
+// 大体常に表示されてる右サイドメニュー
+//
+///////////////////////*/
+.right_side_menu_outer{
+	align-self: flex-start;
+	margin: 0 0px;
+	flex-basis: 200px;
+	border: 4px solid #b0af9f;
+	height: 500px;
+}
+
+.right_side_menu_title{
+	font-size: 20px;
+	background-color: #007591;
+}
+
+.right_side_menu_inner{
+	border: 2px solid #505050;
+	background-color: #101030;
+	margin: 0;
+}
+
+/*//////////////////////
+//
+// 大体常に表示されてるトークルーム一覧
+//
+///////////////////////*/
+
+.see_side{
+	align-self: flex-start;
+	margin: 0 0px;
+	flex-basis: 200px;
+	border: 4px solid #b0af9f;
+}
+
+.see_side_menu{
+	width: 100%;
+	background-color: #007591;
+	font-size: 20px;
+}
+
+.see_side_content{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid #505050;
+	background-color: #101030;
+	margin: 0;
+	width: 100%;
+}
+
+.see_side_title{
+	border: 2px solid #0000ff;
+}
+
+.notice{
+	background-color: #ff0000;
+	border-radius: 50%;
+}
+
+.see_side_lists_outer{
+	margin: 0;
+	height: 500px;
+	overflow: hidden;
+}
+
+.see_side_lists_inner{
+	margin: 0;
+	height: 500px;
+	width: calc(100% + 18px);
+	overflow-y: scroll;
+}
+
+/*//////////////////////
+//
+// 実際の内容の大枠
+//
+///////////////////////*/
+
+.see_contents {
+	align-self: flex-start;
+	margin: 0 0px 10px 0px;
+	flex-basis: 800px;
+	border: 4px solid #b0af9f;
+	align-items: center;
+	justify-content: center;
+}
+
+/*//////////////////////
+//
+// チャットのヘッダー
+//
+///////////////////////*/
+
+.chat_header{
+	display: flex;
+	align-items: center;
+	background-color: #804020;
+	font-size: 20px;
+	margin-bottom: 25px;
+}
+
+.chat_header_title{
+	width: 100%;
+	font-size: 20px;
+}
+
+/*//////////////////////
+//
+// チャットの中身
+//
+///////////////////////*/
+
+.chat_message_other{
+	text-align: left;
+	margin: 10px 0;
+}
+
+.chat_message_other_sender{
+	font-size: 12px;
+	color: #bbbbbb;
+}
+
+.chat_message_me{
+	text-align: right;
+}
+
+.chat_message_text{
+	text-align: left;
+}
+
+.chat_message_text_other{
+	float:left;
+	max-width: 60%;
+	width: auto;
+	border: 2px solid #ddaabb;
+	text-align: left;
+	background-color: #777777;
+	border-radius: 10px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.chat_message_text_me{
+	float:right;
+	max-width: 60%;
+	width: auto;
+	background-color: #107710;
+	border: 2px solid #00bb00;
+	text-align: left;
+	border-radius: 10px;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.chat_message_me{
+	margin: 10px 0;
+}
+
+.chat_message_other{
+	margin: 10px 0;
+}
+
+.chat_message_date{
+	font-size: 8px;
+	clear: both;
+}
+
+.chat_list_outer{
+	margin: 0;
+	height: 500px;
+	overflow: hidden;
+}
+
+.chat_list_inner{
+	margin: 0;
+	height: 500px;
+	width: calc(100% + 18px);
+	overflow-y: scroll;
+}
+
+.chat_send_message_box{
+	border-top: 3px double #ffffff;
+}
+
+.chat_send_message_box textarea{
+	width: 99%;
+	margin: 0;
+	background-color: #303030;
+	color: #ffffff;
+	font-size: 18px;
+}
+
+.talk_list_load{
+	background-color: #555500;
+	font-size: 20px;
+}
+
+/*//////////////////////
+//
+// 共通・アコーディオンのクリック
+//
+///////////////////////*/
+
+.ac-check{
+    display: none;
+}
+
+.ac-label{
+    display: flex;
+	align-items: center;
+	justify-content: center;
+    margin-bottom: 1px;
+    padding: 3px;
+}
+.ac-content{
+    border: 3px solid #303030;
+    height: 0;
+    opacity: 0;
+    padding: 0 0px;
+    transition: .5s;
+    visibility: hidden;
+}
+.ac-check:checked + .ac-label + .ac-content{
+    height: auto;
+    opacity: 1;
+    padding: 5px 10px;
+    visibility: visible;
+}
+
+.ac-content li{
+	list-style: none;
+}
+
+/*//////////////////////
+//
+// 共通・ボタン
+//
+///////////////////////*/
+
+.delete_button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 9pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #6666ff;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  border        : 2px solid #6666ff;    /* 枠の指定 */
+}
+.delete_button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #6666ff;     /* 背景色     */
+  background    : #ff0000;     /* 文字色     */
+}
+
+.button {
+  display       : inline-block;
+  border-radius : 5%;          /* 角丸       */
+  font-size     : 9pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 12px 12px;   /* 余白       */
+  background    : #6666ff;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  border        : 2px solid #6666ff;    /* 枠の指定 */
+}
+.button:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  color         : #6666ff;     /* 背景色     */
+  background    : #ffffff;     /* 文字色     */
+}
+
+input[type="text"],
+input[type="password"]{
+	padding: 0.8em;
+    outline: none;
+    border: 1px solid #DDD;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 18px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus{
+	box-shadow: 0 0 9px #db9834;
+    border: 1px solid #db9834;
+}
+
+
+/*//////////////////////
+//
+// 共通・aタグ
+//
+///////////////////////*/
+
+a{
+	color:#00ff00;
+}
+
+
+/*//////////////////////
+//
+// 共通・バリデーションチェックのメッセージ
+//
+///////////////////////*/
+.validation_message{
+	color: #ff0000;
+}
+
+
+/*//////////////////////
+//
+// 共通・表
+//
+///////////////////////*/
+td{
+	color: #ffffff;
+}
