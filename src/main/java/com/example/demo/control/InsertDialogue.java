@@ -76,7 +76,7 @@ public class InsertDialogue {
 		}
 		catch(NotFoundException e) {
 			if(e.isErrorFieldUserIdName()) {
-				var error = new FieldError(result.getObjectName(), "userIdName", "あなたが指定したユーザーID名は不正です。");
+				var error = new FieldError(result.getObjectName(), "userIdName", "あなたが指定したユーザーIDは不正です。");
 				result.addError(error);
 				redirect.addFlashAttribute("org.springframework.validation.BindingResult.InsertUser", result);
 				redirect.addFlashAttribute("InsertUser", form);

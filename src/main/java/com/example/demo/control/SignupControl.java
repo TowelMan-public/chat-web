@@ -62,7 +62,7 @@ public class SignupControl {
 			userService.insertUser(form);
 		}
 		catch(AlreadyUsedUserIdNameException e) {
-			var error = new FieldError(result.getObjectName(), "userIdName", "そのID名は既に使われています。ほかのID名を指定してください。");
+			var error = new FieldError(result.getObjectName(), "userIdName", "そのIDは既に使われています。ほかのIDを指定してください。");
 			result.addError(error);
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.SignupForm", result);
 			redirect.addFlashAttribute("SignupForm", form);

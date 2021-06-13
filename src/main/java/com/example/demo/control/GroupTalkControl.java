@@ -65,23 +65,27 @@ public class GroupTalkControl {
 	public String updateGroupTalk(@AuthenticationPrincipal UserDetailsImp user, 
 			@PathVariable("groupTalkRoomId") Integer groupTalkRoomId, @PathVariable("talkIndex") Integer talkIndex,
 			@Validated UpdateTalkForm form, BindingResult result, RedirectAttributes redirect) {
-		final String REDIRECT_DIALOGUE_TALK_PAGE = UrlConfig.REDIRECT_ROOT_URL + 
-				"/dialogue/talk/{haveUserIdName}/{talkIndex}"
+		final String REDIRECT_GROUP_TALK_PAGE = UrlConfig.REDIRECT_ROOT_URL + 
+				"/group/talk/{groupTalkRoomId}/{talkIndex}"
 					.replace("{groupTalkRoomId}", groupTalkRoomId.toString())
 					.replace("{talkIndex}", talkIndex.toString());
+		
+		final String REDIRECT_GROUP_PAGE = UrlConfig.REDIRECT_ROOT_URL + 
+				"/group/{groupTalkRoomId}"
+					.replace("{groupTalkRoomId}", groupTalkRoomId.toString());
 		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateIdName", result);
 			redirect.addFlashAttribute("UpdateIdName", form);
-			return REDIRECT_DIALOGUE_TALK_PAGE;
+			return REDIRECT_GROUP_TALK_PAGE;
 		}
 		
 		//処理
 		groupService.updateTalk(user, groupTalkRoomId, talkIndex, form.getTalkContent());
 		
 		//リダイレクト
-		return REDIRECT_DIALOGUE_TALK_PAGE;
+		return REDIRECT_GROUP_PAGE;
 	}
 	
 	/**

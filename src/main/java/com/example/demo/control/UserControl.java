@@ -80,7 +80,7 @@ public class UserControl {
 			userService.updateUserIdName(user, form.getIdName());
 		}
 		catch(AlreadyUsedUserIdNameException e) {
-			var error = new FieldError(result.getObjectName(), "idName", "そのID名は既に使われています。ほかのID名を指定してください。");
+			var error = new FieldError(result.getObjectName(), "idName", "そのIDは既に使われています。ほかのIDを指定してください。");
 			result.addError(error);
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateIdName", result);
 			redirect.addFlashAttribute("UpdateIdName", form);

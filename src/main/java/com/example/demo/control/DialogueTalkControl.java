@@ -71,6 +71,10 @@ public class DialogueTalkControl {
 					.replace("{haveUserIdName}", haveUserIdName)
 					.replace("{talkIndex}", talkIndex.toString());
 		
+		final String REDIRECT_DIALOGUE_PAGE = UrlConfig.REDIRECT_ROOT_URL + 
+				"/dialogue/{haveUserIdName}"
+					.replace("{haveUserIdName}", haveUserIdName);
+		
 		//入力ﾁｪｯｸ
 		if(result.hasErrors()) {
 			redirect.addFlashAttribute("org.springframework.validation.BindingResult.UpdateIdName", result);
@@ -82,7 +86,7 @@ public class DialogueTalkControl {
 		dialogueService.updateTalk(user, haveUserIdName, talkIndex, form.getTalkContent());
 		
 		//リダイレクト
-		return REDIRECT_DIALOGUE_TALK_URL;
+		return REDIRECT_DIALOGUE_PAGE;
 	}
 	
 	/**
